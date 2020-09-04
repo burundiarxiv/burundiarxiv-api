@@ -1,7 +1,38 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+categories = ['POPULATION',
+'HABITAT ET CONDITIONS DE VIE',
+'ENVIRONNEMENT',
+'SANTE ET NUTRITION',
+'PROTECTION SOCIALE',
+'EMPLOI',
+'ENSEIGNEMENT',
+'TOURISME ET HOTELLERIE',
+'PRODUCTION',
+'TRANSPORT ET TELECOMMUNICATION',
+'EAU, ENERGIE ET MINES',
+'PRIX ET INDICES DES PRIX',
+'COMMERCE EXTERIEUR ET AIDES',
+'BALANCE DES PAIEMENTS',
+'FINANCES PUBLIQUES',
+'MONNAIE ET CREDITS',
+'COMPTES ECONOMIQUES',
+'BANQUES ET ASSURANCES COMMERCIALES',
+'JUSTICE',
+'SECURITE PUBLIQUE',
+'DIPLOMATIE']
+
+datasets = []
+
+categories.first(10).each do |category|
+  rand(5..15).times do
+    dataset =   {
+      "category": category,
+      "name": Faker::Book.unique.title,
+      "path": "api.burundiarxiv.org/datasets/isteebu-annuaire-2018-19-02.csv"
+    }
+
+    datasets << dataset
+  end
+end
+
+
+pp datasets
