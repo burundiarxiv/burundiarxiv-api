@@ -4,7 +4,7 @@ class Api::V1::DatasetsController < ApplicationController
     datasets = JSON.parse(File.read('public/datasets.json'))
 
     if search
-      datasets = datasets.select { |data| data['name'].downcase.include? search.downcase }
+      datasets = datasets.select { |dataset| dataset['name'].downcase.include? search.downcase }
     end
     render json: datasets
   end
