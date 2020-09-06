@@ -23,16 +23,16 @@ categories = ['POPULATION',
 datasets = []
 
 categories.first(10).each do |category|
+  data = []
   rand(5..15).times do
     dataset =   {
-      "category": category,
       "name": Faker::Book.unique.title,
       "path": "api.burundiarxiv.org/datasets/isteebu-annuaire-2018-19-02.csv"
     }
 
-    datasets << dataset
+    data << dataset
   end
+  datasets << { category: category, data: data }
 end
-
 
 pp datasets
