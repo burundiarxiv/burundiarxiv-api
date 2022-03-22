@@ -1,8 +1,13 @@
-class Api::V1::DatasetsController < ApplicationController
+# frozen_string_literal: true
 
-  def index
-    datasets = JSON.parse(File.read('public/datasets.json'))
+module Api
+  module V1
+    class DatasetsController < ApplicationController
+      def index
+        datasets = JSON.parse(File.read('public/datasets.json'))
 
-    render json: datasets
+        render json: datasets
+      end
+    end
   end
 end
