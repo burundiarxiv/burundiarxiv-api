@@ -15,6 +15,7 @@ gem 'rack-cors', require: 'rack/cors'
 group :development, :test do
   gem 'faker'
   gem 'pry-byebug'
+  gem 'rspec-rails'
   gem 'rubocop'
   gem 'rubocop-performance'
   gem 'rubocop-rails'
@@ -26,10 +27,6 @@ group :development do
   gem 'listen', '~> 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-end
-
-group :test do
-  gem 'rspec'
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

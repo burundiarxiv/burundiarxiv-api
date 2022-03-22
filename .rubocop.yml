@@ -1,3 +1,5 @@
+inherit_from: .rubocop_todo.yml
+
 # This is the configuration used to check the rubocop source code.
 
 require:
@@ -47,9 +49,6 @@ Layout/EndOfLine:
 Layout/ClassStructure:
   Enabled: true
 
-# Layout/RedundantLineBreak:
-#   Enabled: true
-
 Layout/TrailingWhitespace:
   AllowInHeredoc: false
 
@@ -67,6 +66,8 @@ Layout/HashAlignment:
 
 Layout/LineLength:
   Max: 100
+  Exclude:
+    - config/**/*.rb
   IgnoredPatterns:
     - !ruby/regexp /\A +(it|describe|context|shared_examples|include_examples|it_behaves_like) ["']/
 
@@ -99,9 +100,6 @@ RSpec/FilePath:
     - spec/rubocop/cop/internal_affairs/redundant_let_rubocop_config_new_spec.rb
     - spec/rubocop/formatter/junit_formatter_spec.rb
 
-RSpec/PredicateMatcher:
-  EnforcedStyle: explicit
-
 RSpec/MessageSpies:
   EnforcedStyle: receive
 
@@ -123,4 +121,7 @@ Performance/StartWith:
   SafeMultiline: false
 
 RSpec/StubbedMock:
+  Enabled: false
+
+Style/Documentation:
   Enabled: false
