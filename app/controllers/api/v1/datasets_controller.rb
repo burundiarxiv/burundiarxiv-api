@@ -4,7 +4,7 @@ module Api
   module V1
     class DatasetsController < ApplicationController
       def index
-        datasets = JSON.parse(File.read('public/datasets.json'))
+        datasets = JSON.parse(File.read("public/datasets.json"))
 
         render json: datasets
       end

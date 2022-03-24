@@ -4,8 +4,10 @@ module Api
   module V1
     class WordsController < ApplicationController
       def create
-        puts params
+        # puts params
       end
+
+      def toto; end
     end
   end
 end
