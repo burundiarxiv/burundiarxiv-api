@@ -4,7 +4,7 @@ module Api
   module V1
     class MissingWordsController < ApplicationController
       def index
-        render json: MissingWord.all
+        @missing_words = MissingWord.all.sort_by(&:count).reverse
       end
 
       def create

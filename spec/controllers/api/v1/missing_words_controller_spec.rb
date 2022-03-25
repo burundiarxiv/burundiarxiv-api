@@ -25,8 +25,26 @@ RSpec.describe Api::V1::MissingWordsController do
 
     it 'returns a list of missing words' do
       missing_word = create(:missing_word)
-      get :index
-      expect(response.body).to include(missing_word.value)
+      get :index, format: :json
+
+      expect(JSON.parse(response.body)).to eq(
+        [{ 'value' => missing_word.value, 'count' => missing_word.count }],
+      )
+    end
+
+    it 'sorts the list by count' do
+      create(:missing_word, value: 'a', count: 1)
+      create(:missing_word, value: 'b', count: 2)
+      create(:missing_word, value: 'c', count: 3)
+      get :index, format: :json
+
+      expect(JSON.parse(response.body)).to eq(
+        [
+          { 'value' => 'c', 'count' => 3 },
+          { 'value' => 'b', 'count' => 2 },
+          { 'value' => 'a', 'count' => 1 },
+        ],
+      )
     end
   end
 end
