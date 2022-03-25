@@ -29,11 +29,13 @@ RSpec.describe Api::V1::MissingWordsController do
     end
 
     it 'returns a list of missing words' do
-      missing_word = create(:missing_word)
+      create(:missing_word)
       get :index, format: :json
-
       expect(JSON.parse(response.body)).to eq(
-        [{ 'value' => missing_word.value, 'count' => missing_word.count }],
+        {
+          'count' => 1,
+          'missing_words' => [{ 'value' => 'test', 'count' => 1 }],
+        },
       )
     end
 
@@ -44,11 +46,14 @@ RSpec.describe Api::V1::MissingWordsController do
       get :index, format: :json
 
       expect(JSON.parse(response.body)).to eq(
-        [
-          { 'value' => 'c', 'count' => 3 },
-          { 'value' => 'b', 'count' => 2 },
-          { 'value' => 'a', 'count' => 1 },
-        ],
+        {
+          'count' => 3,
+          'missing_words' => [
+            { 'value' => 'c', 'count' => 3 },
+            { 'value' => 'b', 'count' => 2 },
+            { 'value' => 'a', 'count' => 1 },
+          ],
+        },
       )
     end
   end

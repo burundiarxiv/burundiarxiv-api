@@ -5,6 +5,7 @@ module Api
     class MissingWordsController < ApplicationController
       def index
         @missing_words = MissingWord.all.sort_by(&:count).reverse
+        @count = @missing_words.count
       end
 
       def create
