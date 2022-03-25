@@ -15,6 +15,7 @@ gem 'rack-cors', require: 'rack/cors'
 group :development, :test do
   gem 'faker'
   gem 'pry-byebug'
+  gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'rubocop-performance'
