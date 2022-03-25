@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.array! @missing_words, :value, :count
 
 # json.array! @categories do |category|
