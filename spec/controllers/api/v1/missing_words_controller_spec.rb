@@ -15,6 +15,11 @@ RSpec.describe Api::V1::MissingWordsController do
         :count,
       ).by(1)
     end
+
+    it 'sets the count at 1 for a new missing word' do
+      post :create, params: { word: { value: 'test' } }
+      expect(MissingWord.last.count).to eq(1)
+    end
   end
 
   describe 'GET index' do
