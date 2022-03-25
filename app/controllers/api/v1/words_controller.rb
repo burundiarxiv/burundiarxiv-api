@@ -6,8 +6,6 @@ module Api
       def create
         # puts params
       end
-
-      def toto; end
     end
   end
 end

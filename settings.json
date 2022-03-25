@@ -1,6 +1,1 @@
-{
-  "[ruby]": {
-    "editor.defaultFormatter": "codeco.prettier-eslint-vscode",
-    "editor.formatOnSave": true
-  }
-}
+/
