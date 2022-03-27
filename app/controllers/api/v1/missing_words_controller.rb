@@ -9,9 +9,15 @@ module Api
       end
 
       def create
-        word = MissingWord.find_or_create_by(value: params[:word][:value])
+        word = MissingWord.find_or_create_by(missing_word_params)
         word.increment!(:count)
         head :created
+      end
+
+      private
+
+      def missing_word_params
+        params.require(:word).permit(:value)
       end
     end
   end
