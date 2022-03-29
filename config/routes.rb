@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :datasets, only: [:index]
       resources :missing_words, only: %i[index create]
+      resources :games, only: %i[create]
     end
   end
 end
