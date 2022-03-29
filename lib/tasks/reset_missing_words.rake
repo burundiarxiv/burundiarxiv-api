@@ -2,8 +2,7 @@
 
 desc 'Reset missing words'
 task reset_missing_words: :environment do
-  puts "count MissingWord: #{MissingWord.count}"
-  puts 'destroying'
   MissingWord.destroy_all
+  puts "count MissingWord: #{before}"
   puts "count MissingWord: #{MissingWord.count}"
 end
