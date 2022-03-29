@@ -4,13 +4,29 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::GamesController do
   describe 'POST create' do
-    it 'responds 200' do
-      post :create, params: {}
-      expect(response).to have_http_status(:success)
-    end
+    it 'creates a new game with specific parameters' do
+      post :create,
+           params: {
+             game: {
+               guesses: %w[AMATA UMUTI INSWA],
+               solution: 'INSWA',
+               won: true,
+               start_time: '2022-03-29T23:13:10.174Z',
+               end_time: '2022-03-29T23:14:30.597Z',
+               time_taken: 80,
+               country: 'France',
+             },
+           }
 
-    it 'creates a new game' do
-      expect { post :create, params: {} }.to change(Game, :count).by(1)
+      expect(response).to have_http_status(:success)
+      game = Game.last
+      expect(game.guesses).to eq %w[AMATA UMUTI INSWA]
+      expect(game.solution).to eq 'INSWA'
+      expect(game.won).to eq true
+      expect(game.start_time).to eq '2022-03-29T23:13:10.174Z'
+      expect(game.end_time).to eq '2022-03-29T23:14:30.597Z'
+      expect(game.time_taken).to eq 80
+      expect(game.country).to eq 'France'
     end
   end
 end
