@@ -3,7 +3,9 @@
 module Api
   module V1
     class GamesController < ApplicationController
-      def create; end
+      def create
+        Game.create!
+      end
     end
   end
 end
