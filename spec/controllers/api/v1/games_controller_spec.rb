@@ -11,8 +11,9 @@ RSpec.describe Api::V1::GamesController do
                guesses: %w[AMATA UMUTI INSWA],
                solution: 'INSWA',
                won: true,
-               start_time: '2022-03-29T23:13:10.174Z',
-               end_time: '2022-03-29T23:14:30.597Z',
+               start_time: '2022-03-30T01:25:57+02:00Z',
+               timezone: 'Europe/Paris',
+               end_time: '2022-03-30T01:27:57+02:00Z',
                time_taken: 80,
                country: 'France',
              },
@@ -23,8 +24,9 @@ RSpec.describe Api::V1::GamesController do
       expect(game.guesses).to eq %w[AMATA UMUTI INSWA]
       expect(game.solution).to eq 'INSWA'
       expect(game.won).to eq true
-      expect(game.start_time).to eq '2022-03-29T23:13:10.174Z'
-      expect(game.end_time).to eq '2022-03-29T23:14:30.597Z'
+      expect(game.start_time.to_s).to eq '2022-03-30 01:25:57 +0200'
+      expect(game.end_time.to_s).to eq '2022-03-30 01:27:57 +0200'
+      expect(game.timezone).to eq 'Europe/Paris'
       expect(game.time_taken).to eq 80
       expect(game.country).to eq 'France'
     end
@@ -32,9 +34,7 @@ RSpec.describe Api::V1::GamesController do
 
   describe 'GET index' do
     it 'displays the games of the day' do
-      start_time = Time.current
-      end_time = 10.minutes.from_now
-      game = create(:game, start_time: start_time, end_time: end_time)
+      game = create(:game)
       get :index, format: :json
 
       expect(JSON.parse(response.body)).to eq(
@@ -47,8 +47,9 @@ RSpec.describe Api::V1::GamesController do
               'solution' => game.solution,
               'time_taken' => game.time_taken,
               'won' => game.won,
-              'start_time' => start_time.strftime('%Y-%m-%d %H:%M:%S'),
-              'end_time' => end_time.strftime('%Y-%m-%d %H:%M:%S'),
+              'timezone' => game.timezone,
+              'start_time' => game.start_time.to_s,
+              'end_time' => game.end_time.to_s,
             },
           ],
         },

@@ -5,9 +5,10 @@ FactoryBot.define do
     solution { 'solution' }
     guesses { %w[guess-1 guess-2] }
     won { false }
-    start_time { '2022-03-30 01:17:50' }
-    end_time { '2022-03-30 01:18:50' }
+    start_time { Time.current }
+    end_time { 10.minutes.from_now }
     country { 'France' }
     time_taken { 1 }
+    timezone { 'Europe/Paris' }
   end
 end
