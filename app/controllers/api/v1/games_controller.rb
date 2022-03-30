@@ -3,6 +3,17 @@
 module Api
   module V1
     class GamesController < ApplicationController
+      def index
+        @games =
+          Game
+            .where(
+              start_time:
+                DateTime.now.beginning_of_day..DateTime.now.end_of_day,
+            )
+            .order(start_time: :desc)
+        @count = @games.count
+      end
+
       def create
         Game.create!(game_params)
       end

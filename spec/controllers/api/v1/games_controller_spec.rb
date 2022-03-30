@@ -29,4 +29,30 @@ RSpec.describe Api::V1::GamesController do
       expect(game.country).to eq 'France'
     end
   end
+
+  describe 'GET index' do
+    it 'displays the games of the day' do
+      start_time = Time.current
+      end_time = 10.minutes.from_now
+      game = create(:game, start_time: start_time, end_time: end_time)
+      get :index, format: :json
+
+      expect(JSON.parse(response.body)).to eq(
+        {
+          'count' => 1,
+          'games' => [
+            {
+              'country' => game.country,
+              'guesses' => game.guesses,
+              'solution' => game.solution,
+              'time_taken' => game.time_taken,
+              'won' => game.won,
+              'start_time' => start_time.strftime('%Y-%m-%d %H:%M:%S'),
+              'end_time' => end_time.strftime('%Y-%m-%d %H:%M:%S'),
+            },
+          ],
+        },
+      )
+    end
+  end
 end
