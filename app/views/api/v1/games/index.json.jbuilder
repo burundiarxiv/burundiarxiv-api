@@ -4,6 +4,7 @@ json.count @count
 json.games do
   json.array!(@games) do |game|
     json.extract! game,
+                  :id,
                   :country,
                   :guesses,
                   :solution,

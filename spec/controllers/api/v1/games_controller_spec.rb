@@ -42,6 +42,7 @@ RSpec.describe Api::V1::GamesController do
           'count' => 1,
           'games' => [
             {
+              'id' => game.id,
               'country' => game.country,
               'guesses' => game.guesses,
               'solution' => game.solution,
