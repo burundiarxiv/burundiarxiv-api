@@ -10,7 +10,7 @@ module Api
               start_time:
                 DateTime.now.beginning_of_day..DateTime.now.end_of_day,
             )
-            .order(start_time: :desc)
+            .order(id: :desc)
         @count = @games.count
       end
 

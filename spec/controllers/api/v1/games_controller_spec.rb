@@ -56,5 +56,17 @@ RSpec.describe Api::V1::GamesController do
         },
       )
     end
+
+    it 'orders the games by id in descending order' do
+      create(:game, id: 1)
+      create(:game, id: 2)
+      create(:game, id: 3)
+
+      get :index, format: :json
+
+      expect(
+        JSON.parse(response.body)['games'].map { |game| game['id'] },
+      ).to eq [3, 2, 1]
+    end
   end
 end
