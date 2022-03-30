@@ -35,5 +35,8 @@ module BurundiarxivApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # config.active_record.default_timezone = :local
+    # config.active_record.time_zone_aware_attributes = false
   end
 end

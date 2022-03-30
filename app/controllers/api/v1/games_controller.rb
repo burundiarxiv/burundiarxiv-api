@@ -29,6 +29,7 @@ module Api
             :solution,
             :start_time,
             :time_taken,
+            :timezone,
             :won,
             guesses: [],
           )
