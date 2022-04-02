@@ -24,6 +24,15 @@ RSpec.describe Game, type: :model do
       expect(game.start_time.to_s).to eq '2022-03-30 00:25:57 +0100'
     end
 
+    it 'handles start_time and end_time nil values' do
+      game =
+        create(:game, start_time: nil, end_time: nil, timezone: 'Europe/Paris')
+      expect(game.start_time).to be_nil
+      expect(game.end_time).to be_nil
+    end
+  end
+
+  describe '#compute_score' do
     it 'computes the score when game score is a default value of 0' do
       game =
         create(
@@ -35,11 +44,15 @@ RSpec.describe Game, type: :model do
       expect(game.score).to eq 240
     end
 
-    it 'handles start_time and end_time nil values' do
+    it 'computes score for started in 2022 only' do
       game =
-        create(:game, start_time: nil, end_time: nil, timezone: 'Europe/Paris')
-      expect(game.start_time).to be_nil
-      expect(game.end_time).to be_nil
+        create(
+          :game,
+          guesses: %w[AMATA UMUTI INSWA],
+          start_time: '1970-03-30T01:25:57+02:00Z',
+          time_taken: 1_648_936_974,
+        )
+      expect(game.score).to eq 0
     end
   end
 end
