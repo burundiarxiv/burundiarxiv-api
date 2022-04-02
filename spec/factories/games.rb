@@ -8,7 +8,7 @@ FactoryBot.define do
     start_time { Time.current }
     end_time { 10.minutes.from_now }
     country { 'France' }
-    time_taken { 1 }
+    time_taken { 10 }
     timezone { 'Europe/Paris' }
   end
 end

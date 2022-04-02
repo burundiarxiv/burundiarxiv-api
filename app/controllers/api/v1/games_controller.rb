@@ -20,6 +20,7 @@ module Api
           .permit(
             :country,
             :end_time,
+            :score,
             :solution,
             :start_time,
             :time_taken,
