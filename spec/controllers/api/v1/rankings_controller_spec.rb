@@ -28,10 +28,9 @@ RSpec.describe Api::V1::RankingsController do
       create(:game, score: 7, country: 'France')
       create(:game, score: 11, country: 'Canada')
       create(:game, score: 19, country: 'Burundi')
+      create(:game, score: 20, country: 'Burundi', solution: 'other')
 
-      # create(:game, score: 20, country: 'Burundi', solution: 'other')
-
-      get :index, format: :json
+      get :index, params: { solution: 'solution' }, format: :json
 
       expect(JSON.parse(response.body)['average_international_score']).to eq(
         '12.33',
