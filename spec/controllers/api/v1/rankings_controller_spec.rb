@@ -5,7 +5,13 @@ require 'rails_helper'
 RSpec.describe Api::V1::RankingsController do
   describe 'GET index' do
     it 'returns the rankings based on score and country' do
-      get :index, params: { score: '10', country: 'France' }, format: :json
+      get :index,
+          params: {
+            score: '10',
+            country: 'France',
+            solution: 'solution',
+          },
+          format: :json
 
       expect(JSON.parse(response.body)).to eq(
         {
@@ -17,5 +23,20 @@ RSpec.describe Api::V1::RankingsController do
         },
       )
     end
+
+    it 'computes well the avg international score' do
+      # create(:game)
+    end
   end
 end
+
+# 10 games from 3 differents countries
+# 3 games won in France
+# 3 games won in Burundi
+# 2 games lost in France
+# 2 games lost in Burundi
+# 1 game won in France different solution
+# 1 game lost in France different solution
+# some games won other lost
+# some games with another solution
+# get ranking

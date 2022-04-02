@@ -8,14 +8,15 @@ RSpec.describe Api::V1::GamesController do
       post :create,
            params: {
              game: {
-               guesses: %w[AMATA UMUTI INSWA],
-               solution: 'INSWA',
-               won: true,
-               start_time: '2022-03-30T01:25:57+02:00Z',
-               timezone: 'Europe/Paris',
-               end_time: '2022-03-30T01:27:57+02:00Z',
-               time_taken: 80,
                country: 'France',
+               end_time: '2022-03-30T01:27:57+02:00Z',
+               guesses: %w[AMATA UMUTI INSWA],
+               score: 70,
+               solution: 'INSWA',
+               start_time: '2022-03-30T01:25:57+02:00Z',
+               time_taken: 80,
+               timezone: 'Europe/Paris',
+               won: true,
              },
            }
 
@@ -29,11 +30,28 @@ RSpec.describe Api::V1::GamesController do
       expect(game.timezone).to eq 'Europe/Paris'
       expect(game.time_taken).to eq 80
       expect(game.country).to eq 'France'
+      expect(game.score).to eq 70
+    end
+
+    it 'computes score when game score is a default value of 0' do
+      post :create,
+           params: {
+             game: {
+               country: 'France',
+               end_time: '2022-03-30T01:27:57+02:00Z',
+               guesses: %w[AMATA UMUTI INSWA],
+               start_time: '2022-03-30T01:25:57+02:00Z',
+               time_taken: 80,
+             },
+           }
+
+      expect(response).to have_http_status(:success)
+      expect(Game.last.score).to eq 240
     end
   end
 
   describe 'GET index' do
-    it 'displays the games of the day' do
+    it 'displays all created games' do
       game = create(:game)
       get :index, format: :json
 
@@ -42,15 +60,16 @@ RSpec.describe Api::V1::GamesController do
           'count' => 1,
           'games' => [
             {
-              'id' => game.id,
               'country' => game.country,
-              'guesses' => game.guesses,
-              'solution' => game.solution,
-              'time_taken' => game.time_taken,
-              'won' => game.won,
-              'timezone' => game.timezone,
-              'start_time' => game.start_time.to_s,
               'end_time' => game.end_time.to_s,
+              'guesses' => game.guesses,
+              'id' => game.id,
+              'score' => game.score,
+              'solution' => game.solution,
+              'start_time' => game.start_time.to_s,
+              'time_taken' => game.time_taken,
+              'timezone' => game.timezone,
+              'won' => game.won,
             },
           ],
         },
@@ -67,6 +86,13 @@ RSpec.describe Api::V1::GamesController do
       expect(
         JSON.parse(response.body)['games'].map { |game| game['id'] },
       ).to eq [3, 2, 1]
+    end
+
+    it 'computes score when it is equal to zero' do
+      game = create(:game, guesses: %w[INSWA UMUTI AMATA], time_taken: 100)
+      get :index, format: :json
+
+      expect(JSON.parse(response.body)['games'][0]['score']).to eq(300)
     end
   end
 end
