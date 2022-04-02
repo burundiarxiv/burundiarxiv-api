@@ -44,7 +44,7 @@ RSpec.describe Game, type: :model do
       expect(game.score).to eq 240
     end
 
-    it 'computes score for started in 2022 only' do
+    it 'computes score for time taken small than 24 hours' do
       game =
         create(
           :game,
