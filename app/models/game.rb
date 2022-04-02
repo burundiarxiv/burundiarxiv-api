@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Game < ApplicationRecord
-  before_save :compute_score, if: :score_zero?
+  before_save :compute_score, if: :should_compute_score?
 
   def start_time
     read_attribute(:start_time)&.in_time_zone(timezone)
@@ -12,14 +12,12 @@ class Game < ApplicationRecord
   end
 
   def compute_score
-    return if time_taken.nil?
-
     self.score = time_taken * guesses.length
   end
 
   private
 
-  def score_zero?
-    score.zero?
+  def should_compute_score?
+    score.zero? && time_taken.present? && time_taken < 24.hours.seconds.to_i
   end
 end
