@@ -46,7 +46,7 @@ RSpec.describe Api::V1::GamesController do
            }
 
       expect(response).to have_http_status(:success)
-      expect(Game.last.score).to eq 240
+      expect(Game.last.score).to eq (100 - (80 * 3) / 100.0)
     end
   end
 
@@ -89,10 +89,10 @@ RSpec.describe Api::V1::GamesController do
     end
 
     it 'computes score when it is equal to zero' do
-      game = create(:game, guesses: %w[INSWA UMUTI AMATA], time_taken: 100)
+      create(:game, guesses: %w[INSWA UMUTI AMATA], time_taken: 87)
       get :index, format: :json
 
-      expect(JSON.parse(response.body)['games'][0]['score']).to eq(300)
+      expect(JSON.parse(response.body)['games'][0]['score']).to eq(97.39)
     end
   end
 end

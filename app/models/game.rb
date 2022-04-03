@@ -12,7 +12,7 @@ class Game < ApplicationRecord
   end
 
   def compute_score
-    self.score = time_taken * guesses.length
+    self.score = 100 - ((time_taken * guesses.length) / 100.0)
   end
 
   private
