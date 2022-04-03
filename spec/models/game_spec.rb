@@ -69,4 +69,7 @@ RSpec.describe Game, type: :model do
       expect(game.score).to eq 0
     end
   end
+
+  describe '#avg_international_score' do
+  end
 end

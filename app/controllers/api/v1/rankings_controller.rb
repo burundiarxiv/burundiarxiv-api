@@ -5,13 +5,18 @@ module Api
     class RankingsController < ApplicationController
       def index
         @average_international_score =
-          Game.where(solution: solution, won: true).average(:score).round(2)
+          Game.average_international_score(solution)
+        @average_national_score = Game.average_national_score(solution, country)
       end
 
       private
 
       def solution
         params.require(:solution)
+      end
+
+      def country
+        @country ||= params.require(:country)
       end
     end
   end

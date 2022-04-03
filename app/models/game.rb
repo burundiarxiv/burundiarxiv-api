@@ -3,6 +3,10 @@
 class Game < ApplicationRecord
   before_save :compute_score, if: :should_compute_score?
 
+  scope :won, -> { where(won: true) }
+  scope :solution, ->(solution) { where(solution: solution) }
+  scope :country, ->(country) { where(country: country) }
+
   def start_time
     read_attribute(:start_time)&.in_time_zone(timezone)
   end
@@ -15,6 +19,14 @@ class Game < ApplicationRecord
     return 0 unless won?
 
     self.score = time_taken * guesses.length
+  end
+
+  def self.average_international_score(solution)
+    won.solution(solution).average(:score).round(2)
+  end
+
+  def self.average_national_score(solution, country)
+    won.solution(solution).country(country).average(:score).round(2)
   end
 
   private
