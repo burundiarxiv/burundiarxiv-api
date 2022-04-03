@@ -40,6 +40,19 @@ RSpec.describe Api::V1::RankingsController do
 
       expect(JSON.parse(response.body)['average_national_score']).to eq('15.5')
     end
+
+    it 'handles non existing country' do
+      get :index,
+          params: {
+            solution: 'solution',
+            country: 'Other',
+          },
+          format: :json
+
+      expect(response).to have_http_status(:success)
+      expect(JSON.parse(response.body)['average_national_score']).to eq(0)
+      expect(JSON.parse(response.body)['average_international_score']).to eq(0)
+    end
   end
 end
 

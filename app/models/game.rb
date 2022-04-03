@@ -5,6 +5,7 @@ class Game < ApplicationRecord
 
   scope :won, -> { where(won: true) }
   scope :solution, ->(solution) { where(solution: solution) }
+  scope :won_with, ->(solution) { won.solution(solution) }
   scope :country, ->(country) { where(country: country) }
 
   def start_time
@@ -22,11 +23,16 @@ class Game < ApplicationRecord
   end
 
   def self.average_international_score(solution)
-    won.solution(solution).average(:score).round(2)
+    return 0 if won_with(solution).count.zero?
+
+    won_with(solution).average(:score).round(2)
   end
 
   def self.average_national_score(solution, country)
-    won.solution(solution).country(country).average(:score).round(2)
+    return 0 if won_with(solution).count.zero?
+    return 0 if won_with(solution).country(country).count.zero?
+
+    won_with(solution).country(country).average(:score).round(2)
   end
 
   private
