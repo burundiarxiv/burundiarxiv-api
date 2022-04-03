@@ -14,7 +14,7 @@ class Game < ApplicationRecord
   def compute_score
     return 0 unless won?
 
-    self.score = 100 - ((time_taken * guesses.length) / 100.0)
+    self.score = time_taken * guesses.length
   end
 
   private

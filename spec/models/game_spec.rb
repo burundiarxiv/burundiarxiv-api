@@ -42,7 +42,7 @@ RSpec.describe Game, type: :model do
           time_taken: 81,
         )
 
-      expect(game.score).to eq (100 - (81 * 3) / 100.0)
+      expect(game.score).to eq (81 * 3.0)
     end
 
     it 'when game is not won' do

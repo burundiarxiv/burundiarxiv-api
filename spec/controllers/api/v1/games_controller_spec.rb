@@ -47,7 +47,7 @@ RSpec.describe Api::V1::GamesController do
            }
 
       expect(response).to have_http_status(:success)
-      expect(Game.last.score).to eq (100 - (80 * 3) / 100.0)
+      expect(Game.last.score).to eq 240.0
     end
   end
 
@@ -93,7 +93,7 @@ RSpec.describe Api::V1::GamesController do
       create(:game, guesses: %w[INSWA UMUTI AMATA], time_taken: 87)
       get :index, format: :json
 
-      expect(JSON.parse(response.body)['games'][0]['score']).to eq(97.39)
+      expect(JSON.parse(response.body)['games'][0]['score']).to eq(87 * 3.0)
     end
   end
 end

@@ -9,7 +9,7 @@ task compute_zero_score: :environment do
 end
 
 task recompute_score: :environment do
-  games_with_old_score = Game.where(won: true).where('score > 0')
+  games_with_old_score = Game.where(won: true)
   games_with_old_score.each do |game|
     game.compute_score
     game.save!
