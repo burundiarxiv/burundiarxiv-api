@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,47 +12,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_02_214056) do
-
+ActiveRecord::Schema.define(version: 2022_04_03_004136) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "categories", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'categories', force: :cascade do |t|
+    t.string 'name'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "datasets", force: :cascade do |t|
-    t.bigint "category_id", null: false
-    t.string "name"
-    t.integer "slug"
-    t.string "path"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_datasets_on_category_id"
+  create_table 'datasets', force: :cascade do |t|
+    t.bigint 'category_id', null: false
+    t.string 'name'
+    t.integer 'slug'
+    t.string 'path'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['category_id'], name: 'index_datasets_on_category_id'
   end
 
-  create_table "games", force: :cascade do |t|
-    t.string "solution"
-    t.text "guesses", default: [], array: true
-    t.boolean "won"
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.string "country"
-    t.integer "time_taken"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "timezone"
-    t.integer "score", default: 0
+  create_table 'games', force: :cascade do |t|
+    t.string 'solution'
+    t.text 'guesses', default: [], array: true
+    t.boolean 'won'
+    t.datetime 'start_time'
+    t.datetime 'end_time'
+    t.string 'country'
+    t.integer 'time_taken'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.string 'timezone'
+    t.float 'score', default: 0.0
   end
 
-  create_table "missing_words", force: :cascade do |t|
-    t.string "value"
-    t.integer "count", default: 0
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'missing_words', force: :cascade do |t|
+    t.string 'value'
+    t.integer 'count', default: 0
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  add_foreign_key "datasets", "categories"
+  add_foreign_key 'datasets', 'categories'
 end
