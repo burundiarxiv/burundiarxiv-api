@@ -39,9 +39,10 @@ RSpec.describe Game, type: :model do
           :game,
           guesses: %w[AMATA UMUTI INSWA],
           start_time: '2022-03-30T01:25:57+02:00Z',
-          time_taken: 80,
+          time_taken: 81,
         )
-      expect(game.score).to eq 240
+
+      expect(game.score).to eq (100 - (81 * 3) / 100.0)
     end
 
     it 'computes score for time taken smaller than 24 hours' do
