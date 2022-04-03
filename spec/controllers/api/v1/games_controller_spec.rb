@@ -42,6 +42,7 @@ RSpec.describe Api::V1::GamesController do
                guesses: %w[AMATA UMUTI INSWA],
                start_time: '2022-03-30T01:25:57+02:00Z',
                time_taken: 80,
+               won: true,
              },
            }
 
