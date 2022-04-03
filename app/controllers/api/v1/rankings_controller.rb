@@ -5,7 +5,7 @@ module Api
     class RankingsController < ApplicationController
       def index
         @average_international_score =
-          Game.where(solution: solution).average(:score).round(2)
+          Game.where(solution: solution, won: true).average(:score).round(2)
       end
 
       private

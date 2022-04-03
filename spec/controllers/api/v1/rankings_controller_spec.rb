@@ -24,10 +24,11 @@ RSpec.describe Api::V1::RankingsController do
       )
     end
 
-    it 'computes well the avg international score' do
+    it 'computes the avg international score' do
       create(:game, score: 7, country: 'France')
       create(:game, score: 11, country: 'Canada')
       create(:game, score: 19, country: 'Burundi')
+      create(:game, score: 19, country: 'Burundi', won: false)
       create(:game, score: 20, country: 'Burundi', solution: 'other')
 
       get :index, params: { solution: 'solution' }, format: :json
