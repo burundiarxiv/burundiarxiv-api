@@ -35,6 +35,22 @@ class Game < ApplicationRecord
     won_with(solution).country(country).average(:score).round(2)
   end
 
+  def self.international_rank(solution, score)
+    return 0 if won_with(solution).count.zero?
+
+    position = won_with(solution).where('score <= ?', score).count
+    "#{position}/#{position + 1}"
+  end
+
+  def self.national_rank(solution, country, score)
+    return 0 if won_with(solution).count.zero?
+    return 0 if won_with(solution).country(country).count.zero?
+
+    position =
+      won_with(solution).country(country).where('score <= ?', score).count
+    "#{position}/#{position + 1}"
+  end
+
   private
 
   def should_compute_score?

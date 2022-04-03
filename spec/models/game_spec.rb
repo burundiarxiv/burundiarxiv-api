@@ -70,6 +70,15 @@ RSpec.describe Game, type: :model do
     end
   end
 
-  describe '#avg_international_score' do
+  describe '#average_international_score' do
+  end
+
+  describe '#average_national_score' do
+  end
+
+  describe '#national_rank' do
+  end
+
+  describe '#internal_national_rank' do
   end
 end

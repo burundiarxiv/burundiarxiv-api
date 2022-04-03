@@ -7,6 +7,8 @@ module Api
         @average_international_score =
           Game.average_international_score(solution)
         @average_national_score = Game.average_national_score(solution, country)
+        @international_rank = Game.international_rank(solution, score)
+        @national_rank = Game.national_rank(solution, country, score)
       end
 
       private
@@ -17,6 +19,10 @@ module Api
 
       def country
         @country ||= params.require(:country)
+      end
+
+      def score
+        params.require(:score).to_i
       end
     end
   end
