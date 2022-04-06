@@ -3,7 +3,7 @@
 class Game < ApplicationRecord
   before_save :compute_score, if: :should_compute_score?
 
-  scope :won, -> { where(won: true) }
+  scope :won, -> { where(won: true) } # take into account start_time at 1970
   scope :solution, ->(solution) { where(solution: solution) }
   scope :won_with, ->(solution) { won.solution(solution) }
   scope :country, ->(country) { where(country: country) }
@@ -23,37 +23,51 @@ class Game < ApplicationRecord
   end
 
   def self.average_international_score(solution)
-    return 0 if won_with(solution).count.zero?
+    return 0 if won_with_solution(solution).count.zero?
 
-    won_with(solution).average(:score).round(2)
+    won_with_solution(solution).average(:score).round(2)
   end
 
   def self.average_national_score(solution, country)
-    return 0 if won_with(solution).count.zero?
-    return 0 if won_with(solution).country(country).count.zero?
+    return 0 if won_with_solution(solution).count.zero?
+    return 0 if won_with_solution_country(solution, country).count.zero?
 
-    won_with(solution).country(country).average(:score).round(2)
+    won_with_solution_country(solution, country).average(:score).round(2)
   end
 
   def self.international_rank(solution, score)
-    return 0 if won_with(solution).count.zero?
+    return 0 if won_with_solution(solution).count.zero?
 
-    position = won_with(solution).where('score <= ?', score).count
-    "#{position}/#{position + 1}"
+    position = won_with_solution(solution).where('score <= ?', score).count
+    "#{position}/#{won_with_solution(solution).count}"
   end
 
   def self.national_rank(solution, country, score)
-    return 0 if won_with(solution).count.zero?
-    return 0 if won_with(solution).country(country).count.zero?
+    return 0 if won_with_solution(solution).count.zero?
+    return 0 if won_with_solution_country(solution, country).count.zero?
 
     position =
-      won_with(solution).country(country).where('score <= ?', score).count
-    "#{position}/#{position + 1}"
+      won_with_solution_country(solution, country)
+        .where('score <= ?', score)
+        .count
+    "#{position}/#{won_with_solution_country(solution, country).count}"
   end
 
   private
 
+  def self.won_with_solution_country(solution, country)
+    @won_with_solution_country ||= won_with_solution(solution).country(country)
+  end
+
+  def self.won_with_solution(solution)
+    @won_with_solution ||= won.solution(solution)
+  end
+
   def should_compute_score?
-    score.zero? && time_taken.present? && time_taken < 24.hours.seconds.to_i
+    score.zero? && time_taken.present? && acceptable_time_taken?
+  end
+
+  def acceptable_time_taken?
+    time_taken < 24.hours.seconds.to_i
   end
 end
