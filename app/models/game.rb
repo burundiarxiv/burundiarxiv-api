@@ -39,6 +39,7 @@ class Game < ApplicationRecord
     return 0 if won.solution(solution).count.zero?
 
     position = won.solution(solution).where('score <= ?', score).count
+    position = position.zero? ? 1 : position
     "#{position}/#{won.solution(solution).count}"
   end
 
@@ -48,6 +49,7 @@ class Game < ApplicationRecord
 
     position =
       won.solution(solution).country(country).where('score <= ?', score).count
+    position = position.zero? ? 1 : position
     "#{position}/#{won.solution(solution).country(country).count}"
   end
 
