@@ -31,6 +31,7 @@ class Game < ApplicationRecord
   def self.median_national_score(solution, country)
     return 0 if won.solution(solution).count.zero?
     return 0 if won.solution(solution).country(country).count.zero?
+
     won.solution(solution).country(country).median(:score).round(2)
   end
 

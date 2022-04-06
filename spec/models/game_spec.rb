@@ -70,15 +70,66 @@ RSpec.describe Game, type: :model do
     end
   end
 
-  describe '#average_international_score' do
+  describe '#median_international_score' do
+    it 'computes the median international score' do
+      create(:game, score: 7, country: 'France')
+      create(:game, score: 11, country: 'Canada')
+      create(:game, score: 19, country: 'Burundi')
+      create(:game, score: 19, country: 'Burundi', won: false)
+      create(:game, score: 20, country: 'Burundi', solution: 'other')
+
+      expect(Game.median_international_score('solution')).to eq 11.0
+    end
+
+    it 'handles non existing country' do
+      expect(Game.median_international_score('solution')).to eq 0
+    end
   end
 
-  describe '#average_national_score' do
+  describe '#median_national_score' do
+    it 'computes the median national score' do
+      create(:game, score: 7, country: 'France')
+      create(:game, score: 11, country: 'Canada')
+      create(:game, score: 12, country: 'Burundi')
+      create(:game, score: 19, country: 'Burundi')
+      create(:game, score: 19, country: 'Burundi', won: false)
+      create(:game, score: 20, country: 'Burundi', solution: 'other')
+
+      expect(Game.median_national_score('solution', 'Burundi')).to eq 15.5
+    end
+
+    it 'handles non existing country' do
+      expect(Game.median_national_score('solution', 'France')).to eq 0
+    end
   end
 
   describe '#national_rank' do
+    it 'computes the national rank' do
+      create(:game, score: 7, country: 'France')
+      create(:game, score: 11, country: 'Canada')
+      create(:game, score: 12, country: 'Burundi')
+      create(:game, score: 15, country: 'Burundi')
+      create(:game, score: 17, country: 'Burundi')
+      create(:game, score: 18, country: 'Burundi')
+      create(:game, score: 19, country: 'Burundi', won: false)
+      create(:game, score: 20, country: 'Burundi', solution: 'other')
+
+      expect(Game.national_rank('solution', 'Burundi', 17)).to eq('3/4')
+    end
   end
 
   describe '#internal_national_rank' do
+    it 'computes the international rank' do
+      create(:game, score: 7, country: 'France')
+      create(:game, score: 11, country: 'Canada')
+      create(:game, score: 12, country: 'Burundi')
+      create(:game, score: 15, country: 'Burundi')
+      create(:game, score: 17, country: 'Burundi')
+      create(:game, score: 18, country: 'Burundi')
+      create(:game, score: 19, country: 'Burundi', won: false)
+      create(:game, score: 20, country: 'Burundi', solution: 'other')
+
+      expect(Game.international_rank('solution', 17)).to eq('5/6')
+    end
   end
 end
