@@ -15,6 +15,7 @@ RSpec.describe Api::V1::RankingsController do
           params: {
             solution: 'solution',
             country: 'France',
+            score: 20,
           },
           format: :json
 
@@ -35,9 +36,9 @@ RSpec.describe Api::V1::RankingsController do
           params: {
             solution: 'solution',
             country: 'Burundi',
+            score: 12,
           },
           format: :json
-
       expect(JSON.parse(response.body)['average_national_score']).to eq('15.5')
     end
 
@@ -46,6 +47,7 @@ RSpec.describe Api::V1::RankingsController do
           params: {
             solution: 'solution',
             country: 'Other',
+            score: 20,
           },
           format: :json
 
@@ -92,7 +94,6 @@ RSpec.describe Api::V1::RankingsController do
             score: 17,
           },
           format: :json
-
       expect(JSON.parse(response.body)['national_rank']).to eq('3/4')
     end
   end

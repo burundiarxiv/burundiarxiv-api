@@ -23,45 +23,34 @@ class Game < ApplicationRecord
   end
 
   def self.average_international_score(solution)
-    return 0 if won_with_solution(solution).count.zero?
+    return 0 if won.solution(solution).count.zero?
 
-    won_with_solution(solution).average(:score).round(2)
+    won.solution(solution).average(:score).round(2)
   end
 
   def self.average_national_score(solution, country)
-    return 0 if won_with_solution(solution).count.zero?
-    return 0 if won_with_solution_country(solution, country).count.zero?
-
-    won_with_solution_country(solution, country).average(:score).round(2)
+    return 0 if won.solution(solution).count.zero?
+    return 0 if won.solution(solution).country(country).count.zero?
+    won.solution(solution).country(country).average(:score).round(2)
   end
 
   def self.international_rank(solution, score)
-    return 0 if won_with_solution(solution).count.zero?
+    return 0 if won.solution(solution).count.zero?
 
-    position = won_with_solution(solution).where('score <= ?', score).count
-    "#{position}/#{won_with_solution(solution).count}"
+    position = won.solution(solution).where('score <= ?', score).count
+    "#{position}/#{won.solution(solution).count}"
   end
 
   def self.national_rank(solution, country, score)
-    return 0 if won_with_solution(solution).count.zero?
-    return 0 if won_with_solution_country(solution, country).count.zero?
+    return 0 if won.solution(solution).count.zero?
+    return 0 if won.solution(solution).country(country).count.zero?
 
     position =
-      won_with_solution_country(solution, country)
-        .where('score <= ?', score)
-        .count
-    "#{position}/#{won_with_solution_country(solution, country).count}"
+      won.solution(solution).country(country).where('score <= ?', score).count
+    "#{position}/#{won.solution(solution).country(country).count}"
   end
 
   private
-
-  def self.won_with_solution_country(solution, country)
-    @won_with_solution_country ||= won_with_solution(solution).country(country)
-  end
-
-  def self.won_with_solution(solution)
-    @won_with_solution ||= won.solution(solution)
-  end
 
   def should_compute_score?
     score.zero? && time_taken.present? && acceptable_time_taken?
