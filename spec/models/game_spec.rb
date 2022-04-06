@@ -78,11 +78,11 @@ RSpec.describe Game, type: :model do
       create(:game, score: 19, country: 'Burundi', won: false)
       create(:game, score: 20, country: 'Burundi', solution: 'other')
 
-      expect(Game.median_international_score('solution')).to eq 11.0
+      expect(Game.median_international_score(solution: 'solution')).to eq 11.0
     end
 
     it 'handles non existing country' do
-      expect(Game.median_international_score('solution')).to eq 0
+      expect(Game.median_international_score(solution: 'solution')).to eq 0
     end
   end
 
@@ -95,11 +95,15 @@ RSpec.describe Game, type: :model do
       create(:game, score: 19, country: 'Burundi', won: false)
       create(:game, score: 20, country: 'Burundi', solution: 'other')
 
-      expect(Game.median_national_score('solution', 'Burundi')).to eq 15.5
+      expect(
+        Game.median_national_score(solution: 'solution', country: 'Burundi'),
+      ).to eq 15.5
     end
 
     it 'handles non existing country' do
-      expect(Game.median_national_score('solution', 'France')).to eq 0
+      expect(
+        Game.median_national_score(solution: 'solution', country: 'France'),
+      ).to eq 0
     end
   end
 
@@ -114,7 +118,9 @@ RSpec.describe Game, type: :model do
       create(:game, score: 19, country: 'Burundi', won: false)
       create(:game, score: 20, country: 'Burundi', solution: 'other')
 
-      expect(Game.national_rank('solution', 'Burundi', 17)).to eq('3/4')
+      expect(
+        Game.national_rank(solution: 'solution', country: 'Burundi', score: 17),
+      ).to eq('3/4')
     end
   end
 
@@ -129,7 +135,9 @@ RSpec.describe Game, type: :model do
       create(:game, score: 19, country: 'Burundi', won: false)
       create(:game, score: 20, country: 'Burundi', solution: 'other')
 
-      expect(Game.international_rank('solution', 17)).to eq('5/6')
+      expect(Game.international_rank(solution: 'solution', score: 17)).to eq(
+        '5/6',
+      )
     end
   end
 end
