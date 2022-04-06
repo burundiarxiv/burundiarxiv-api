@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-json.average_international_score 32
-json.average_national_score 10
-json.country 'France'
-json.international_rank '3/4'
-json.national_rank '1/2'
+json.median_international_score @median_international_score.to_s
+json.median_national_score @median_national_score.to_s
+json.country @country
+json.international_rank @international_rank
+json.national_rank @national_rank
