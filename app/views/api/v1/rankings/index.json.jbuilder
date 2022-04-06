@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-json.average_international_score @average_international_score
-json.average_national_score @average_national_score
+json.median_international_score @median_international_score.to_s
+json.median_national_score @median_national_score.to_s
 json.country @country
 json.international_rank @international_rank
 json.national_rank @national_rank

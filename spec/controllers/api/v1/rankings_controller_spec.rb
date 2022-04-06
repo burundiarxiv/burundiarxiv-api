@@ -19,8 +19,8 @@ RSpec.describe Api::V1::RankingsController do
           },
           format: :json
 
-      expect(JSON.parse(response.body)['average_international_score']).to eq(
-        '12.33',
+      expect(JSON.parse(response.body)['median_international_score']).to eq(
+        '11.0',
       )
     end
 
@@ -39,7 +39,7 @@ RSpec.describe Api::V1::RankingsController do
             score: 12,
           },
           format: :json
-      expect(JSON.parse(response.body)['average_national_score']).to eq('15.5')
+      expect(JSON.parse(response.body)['median_national_score']).to eq('15.5')
     end
 
     it 'handles non existing country' do
@@ -52,8 +52,8 @@ RSpec.describe Api::V1::RankingsController do
           format: :json
 
       expect(response).to have_http_status(:success)
-      expect(JSON.parse(response.body)['average_national_score']).to eq(0)
-      expect(JSON.parse(response.body)['average_international_score']).to eq(0)
+      expect(JSON.parse(response.body)['median_national_score']).to eq('0')
+      expect(JSON.parse(response.body)['median_international_score']).to eq('0')
     end
 
     it 'computes the international rank' do

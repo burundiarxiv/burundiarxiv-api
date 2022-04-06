@@ -22,16 +22,16 @@ class Game < ApplicationRecord
     self.score = time_taken * guesses.length
   end
 
-  def self.average_international_score(solution)
+  def self.median_international_score(solution)
     return 0 if won.solution(solution).count.zero?
 
-    won.solution(solution).average(:score).round(2)
+    won.solution(solution).median(:score).round(2)
   end
 
-  def self.average_national_score(solution, country)
+  def self.median_national_score(solution, country)
     return 0 if won.solution(solution).count.zero?
     return 0 if won.solution(solution).country(country).count.zero?
-    won.solution(solution).country(country).average(:score).round(2)
+    won.solution(solution).country(country).median(:score).round(2)
   end
 
   def self.international_rank(solution, score)
