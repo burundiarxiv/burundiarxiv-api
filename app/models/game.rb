@@ -38,7 +38,7 @@ class Game < ApplicationRecord
   def self.international_rank(solution:, score:)
     return 0 if won.solution(solution).count.zero?
 
-    position = won.solution(solution).where('score <= ?', score).count
+    position = won.solution(solution).where('score >= ?', score).count
     position = position.zero? ? 1 : position
     "#{position}/#{won.solution(solution).count}"
   end
@@ -48,7 +48,7 @@ class Game < ApplicationRecord
     return 0 if won.solution(solution).country(country).count.zero?
 
     position =
-      won.solution(solution).country(country).where('score <= ?', score).count
+      won.solution(solution).country(country).where('score >= ?', score).count
     position = position.zero? ? 1 : position
     "#{position}/#{won.solution(solution).country(country).count}"
   end

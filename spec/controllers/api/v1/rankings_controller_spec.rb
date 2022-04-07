@@ -8,7 +8,7 @@ RSpec.describe Api::V1::RankingsController do
       create(:game, score: 7, country: 'France')
       create(:game, score: 11, country: 'Canada')
       create(:game, score: 12, country: 'Burundi')
-      create(:game, score: 15, country: 'Burundi')
+      create(:game, score: 15, country: 'France')
       create(:game, score: 17, country: 'Burundi')
       create(:game, score: 18, country: 'Burundi')
       create(:game, score: 19, country: 'Burundi', won: false)
@@ -18,17 +18,17 @@ RSpec.describe Api::V1::RankingsController do
           params: {
             solution: 'solution',
             country: 'Burundi',
-            score: 17,
+            score: 12,
           },
           format: :json
 
       expect(JSON.parse(response.body)).to eq(
         {
           'median_international_score' => '13.5',
-          'median_national_score' => '16.0',
+          'median_national_score' => '17.0',
           'country' => 'Burundi',
-          'international_rank' => '5/6',
-          'national_rank' => '3/4',
+          'international_rank' => '4/6',
+          'national_rank' => '3/3',
         },
       )
     end
