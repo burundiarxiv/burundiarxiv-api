@@ -111,32 +111,32 @@ RSpec.describe Game, type: :model do
     it 'computes the national rank' do
       create(:game, score: 7, country: 'France')
       create(:game, score: 11, country: 'Canada')
+      create(:game, score: -18, country: 'Burundi')
       create(:game, score: 12, country: 'Burundi')
       create(:game, score: 15, country: 'Burundi')
       create(:game, score: 17, country: 'Burundi')
-      create(:game, score: 18, country: 'Burundi')
       create(:game, score: 19, country: 'Burundi', won: false)
       create(:game, score: 20, country: 'Burundi', solution: 'other')
 
       expect(
         Game.national_rank(solution: 'solution', country: 'Burundi', score: 17),
-      ).to eq('3/4')
+      ).to eq('1/4')
     end
   end
 
   describe '#internal_national_rank' do
     it 'computes the international rank' do
+      create(:game, score: -15, country: 'Burundi')
       create(:game, score: 7, country: 'France')
       create(:game, score: 11, country: 'Canada')
       create(:game, score: 12, country: 'Burundi')
-      create(:game, score: 15, country: 'Burundi')
       create(:game, score: 17, country: 'Burundi')
       create(:game, score: 18, country: 'Burundi')
       create(:game, score: 19, country: 'Burundi', won: false)
       create(:game, score: 20, country: 'Burundi', solution: 'other')
 
       expect(Game.international_rank(solution: 'solution', score: 17)).to eq(
-        '5/6',
+        '2/6',
       )
     end
   end
