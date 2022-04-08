@@ -24,11 +24,11 @@ RSpec.describe Api::V1::RankingsController do
 
       expect(JSON.parse(response.body)).to eq(
         {
-          'median_international_score' => '13.5',
-          'median_national_score' => '17.0',
+          'median_international_score' => '15.0',
+          'median_national_score' => '17.5',
           'country' => 'Burundi',
-          'international_rank' => '4/6',
-          'national_rank' => '3/3',
+          'international_rank' => '5/7',
+          'national_rank' => '4/4',
         },
       )
     end
