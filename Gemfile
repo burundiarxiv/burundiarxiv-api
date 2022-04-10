@@ -26,6 +26,10 @@ group :development, :test do
   gem 'rubocop-rspec'
 end
 
+group :test do
+  gem 'shoulda-matchers'
+end
+
 group :development do
   gem 'listen', '~> 3.2'
   gem 'spring'
