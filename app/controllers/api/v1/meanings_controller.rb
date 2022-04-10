@@ -4,8 +4,8 @@ module Api
   module V1
     class MeaningsController < ApplicationController
       def index
-        @meanings = Meaning.all
-        @count = @meanings.count
+        @meanings = Meaning.order(created_at: :desc).all.group_by(&:proverb)
+        @count = Meaning.count
       end
 
       def create
