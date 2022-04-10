@@ -3,6 +3,11 @@
 module Api
   module V1
     class MeaningsController < ApplicationController
+      def index
+        @meanings = Meaning.all
+        @count = @meanings.count
+      end
+
       def create
         Meaning.create!(meaning_params)
         head :created

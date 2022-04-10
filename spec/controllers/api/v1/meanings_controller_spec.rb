@@ -22,4 +22,23 @@ RSpec.describe Api::V1::MeaningsController do
       )
     end
   end
+
+  describe 'GET index' do
+    it 'renders the created meanings' do
+      create(:meaning)
+      get :index, format: :json
+      expect(JSON.parse(response.body)).to eq(
+        {
+          'count' => 1,
+          'meanings' => [
+            {
+              'keyword' => 'keyword',
+              'meaning' => 'meaning',
+              'proverb' => 'proverb',
+            },
+          ],
+        },
+      )
+    end
+  end
 end
