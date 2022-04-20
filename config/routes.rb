@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :meanings, only: %i[index create]
       resources :missing_words, only: %i[index create]
       resources :rankings, only: %i[index]
+      resources :sms_forwarders, only: %i[create]
     end
   end
 end
