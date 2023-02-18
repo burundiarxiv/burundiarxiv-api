@@ -24,14 +24,19 @@ class Game < ApplicationRecord
   def self.median_international_score(solution:)
     return 0 if with_solution(solution).count.zero?
 
-    with_solution(solution).median(:score).round(2)
+    with_solution(solution).median(:score).round(2).to_s.gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1 ')
   end
 
   def self.median_national_score(solution:, country:)
     return 0 if with_solution(solution).count.zero?
     return 0 if with_solution(solution).country(country).count.zero?
 
-    with_solution(solution).country(country).median(:score).round(2)
+    with_solution(solution)
+      .country(country)
+      .median(:score)
+      .round(2)
+      .to_s
+      .gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1 ')
   end
 
   def self.international_rank(solution:, score:)

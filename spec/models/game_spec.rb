@@ -5,28 +5,17 @@ require 'rails_helper'
 RSpec.describe Game, type: :model do
   describe '#start_time' do
     it 'returns the start_time with in the correct timezone : Europe/Paris' do
-      game =
-        create(
-          :game,
-          start_time: '2022-03-30T01:25:57+02:00Z',
-          timezone: 'Europe/Paris',
-        )
+      game = create(:game, start_time: '2022-03-30T01:25:57+02:00Z', timezone: 'Europe/Paris')
       expect(game.start_time.to_s).to eq '2022-03-30 01:25:57 +0200'
     end
 
     it 'returns the start_time with in the correct timezone : Europe/Dublin' do
-      game =
-        create(
-          :game,
-          start_time: '2022-03-30T01:25:57+02:00Z',
-          timezone: 'Europe/Dublin',
-        )
+      game = create(:game, start_time: '2022-03-30T01:25:57+02:00Z', timezone: 'Europe/Dublin')
       expect(game.start_time.to_s).to eq '2022-03-30 00:25:57 +0100'
     end
 
     it 'handles start_time and end_time nil values' do
-      game =
-        create(:game, start_time: nil, end_time: nil, timezone: 'Europe/Paris')
+      game = create(:game, start_time: nil, end_time: nil, timezone: 'Europe/Paris')
       expect(game.start_time).to be_nil
       expect(game.end_time).to be_nil
     end
@@ -78,7 +67,7 @@ RSpec.describe Game, type: :model do
       create(:game, score: 20, country: 'Burundi', won: false)
       create(:game, score: 20, country: 'Burundi', solution: 'other')
 
-      expect(Game.median_international_score(solution: 'solution')).to eq 15.0
+      expect(Game.median_international_score(solution: 'solution')).to eq '15.0'
     end
 
     it 'handles non existing country' do
@@ -95,15 +84,11 @@ RSpec.describe Game, type: :model do
       create(:game, score: 20, country: 'Burundi', won: false)
       create(:game, score: 20, country: 'Burundi', solution: 'other')
 
-      expect(
-        Game.median_national_score(solution: 'solution', country: 'Burundi'),
-      ).to eq 19.0
+      expect(Game.median_national_score(solution: 'solution', country: 'Burundi')).to eq '19.0'
     end
 
     it 'handles non existing country' do
-      expect(
-        Game.median_national_score(solution: 'solution', country: 'France'),
-      ).to eq 0
+      expect(Game.median_national_score(solution: 'solution', country: 'France')).to eq 0
     end
   end
 
@@ -118,9 +103,7 @@ RSpec.describe Game, type: :model do
       create(:game, score: 19, country: 'Burundi', won: false)
       create(:game, score: 20, country: 'Burundi', solution: 'other')
 
-      expect(
-        Game.national_rank(solution: 'solution', country: 'Burundi', score: 17),
-      ).to eq('2/5')
+      expect(Game.national_rank(solution: 'solution', country: 'Burundi', score: 17)).to eq('2/5')
     end
   end
 
@@ -135,9 +118,7 @@ RSpec.describe Game, type: :model do
       create(:game, score: 19, country: 'Burundi', won: false)
       create(:game, score: 20, country: 'Burundi', solution: 'other')
 
-      expect(Game.international_rank(solution: 'solution', score: 17)).to eq(
-        '3/7',
-      )
+      expect(Game.international_rank(solution: 'solution', score: 17)).to eq('3/7')
     end
   end
 end
