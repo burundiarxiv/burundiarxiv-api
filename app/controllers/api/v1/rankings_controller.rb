@@ -4,14 +4,10 @@ module Api
   module V1
     class RankingsController < ApplicationController
       def index
-        @median_international_score =
-          Game.median_international_score(solution: solution)
-        @median_national_score =
-          Game.median_national_score(solution: solution, country: country)
-        @international_rank =
-          Game.international_rank(solution: solution, score: score)
-        @national_rank =
-          Game.national_rank(solution: solution, country: country, score: score)
+        @median_international_score = Game.median_international_score(solution: solution)
+        @median_national_score = Game.median_national_score(solution: solution, country: country)
+        @international_rank = Game.international_rank(solution: solution, score: score)
+        @national_rank = Game.national_rank(solution: solution, country: country, score: score)
       end
 
       private
