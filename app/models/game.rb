@@ -55,6 +55,15 @@ class Game < ApplicationRecord
     "#{position}/#{games.count}"
   end
 
+  def self.best_players(solution:)
+    games = won_with_solution(solution)
+    games
+      .order(score: :desc)
+      .limit(10)
+      .map
+      .with_index { |game, rank| { rank: rank + 1, score: game.score, country: game.country } }
+  end
+
   private
 
   def should_compute_score?

@@ -184,4 +184,39 @@ RSpec.describe Game, type: :model do
       expect(Game.international_rank(solution: 'solution', score: 17)).to eq('2/2')
     end
   end
+
+  describe '#best_players' do
+    it 'returns the 10 best players for a given solution' do
+      create(:game, score: 20, country: 'Burundi', start_time: '2020-03-30T01:25:57+02:00Z')
+      create(:game, score: 21, country: 'Burundi', start_time: '2020-03-30T01:25:57+02:00Z')
+      create(:game, score: 22, country: 'Burundi', solution: 'other')
+      create(:game, score: 21, country: 'Burundi')
+      create(:game, score: 20, country: 'Belgium')
+      create(:game, score: 19, country: 'Burundi')
+      create(:game, score: 18, country: 'Rwanda')
+      create(:game, score: 17)
+      create(:game, score: 16, country: 'Burundi')
+      create(:game, score: 15, country: 'Sweden')
+      create(:game, score: 14, country: 'Burundi')
+      create(:game, score: 13, country: 'Burundi')
+      create(:game, score: 12, country: 'Canada')
+      create(:game, score: 11, country: 'Burundi')
+      create(:game, score: 10, country: 'Germany')
+
+      expect(Game.best_players(solution: 'solution')).to eq(
+        [
+          { rank: 1, score: 21.0, country: 'Burundi' },
+          { rank: 2, score: 20.0, country: 'Belgium' },
+          { rank: 3, score: 19.0, country: 'Burundi' },
+          { rank: 4, score: 18.0, country: 'Rwanda' },
+          { rank: 5, score: 17.0, country: 'France' },
+          { rank: 6, score: 16.0, country: 'Burundi' },
+          { rank: 7, score: 15.0, country: 'Sweden' },
+          { rank: 8, score: 14.0, country: 'Burundi' },
+          { rank: 9, score: 13.0, country: 'Burundi' },
+          { rank: 10, score: 12.0, country: 'Canada' },
+        ],
+      )
+    end
+  end
 end
