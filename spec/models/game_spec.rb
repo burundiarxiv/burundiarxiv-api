@@ -249,6 +249,7 @@ RSpec.describe Game, type: :model do
           { rank: 3, country: 'Rwanda', count: 3 },
           { rank: 4, country: 'France', count: 2 },
           { rank: 5, country: 'Germany', count: 1 },
+          { rank: 6, country: 'Sweden', count: 1 },
         ],
       )
     end

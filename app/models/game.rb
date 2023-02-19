@@ -70,7 +70,7 @@ class Game < ApplicationRecord
       .group(:country)
       .count
       .sort_by { |_country, count| -count }
-      .first(5)
+      .first(10)
       .map
       .with_index { |(country, count), rank| { rank: rank + 1, country: country, count: count } }
   end

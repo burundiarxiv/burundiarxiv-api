@@ -31,6 +31,11 @@ RSpec.describe Api::V1::RankingsController do
             { 'rank' => 5, 'score' => 11.0, 'country' => 'Canada' },
             { 'rank' => 6, 'score' => 7.0, 'country' => 'France' },
           ],
+          'players_by_country' => [
+            { 'rank' => 1, 'country' => 'Burundi', 'count' => 4 },
+            { 'rank' => 2, 'country' => 'France', 'count' => 2 },
+            { 'rank' => 3, 'country' => 'Canada', 'count' => 1 },
+          ],
         },
       )
     end

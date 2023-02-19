@@ -9,6 +9,7 @@ module Api
         @international_rank = Game.international_rank(solution: solution, score: score)
         @national_rank = Game.national_rank(solution: solution, country: country, score: score)
         @best_players = Game.best_players(solution: solution)
+        @players_by_country = Game.players_by_country(solution: solution)
       end
 
       private
