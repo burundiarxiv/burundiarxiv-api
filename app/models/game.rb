@@ -5,6 +5,7 @@ class Game < ApplicationRecord
 
   scope :won, -> { where(won: true) } # take into account start_time at 1970
   scope :with_solution, ->(solution) { where(solution: solution) }
+  scope :won_with_solution, ->(solution) { won.with_solution(solution) }
   scope :country, ->(country) { where(country: country) }
 
   def start_time
@@ -40,20 +41,21 @@ class Game < ApplicationRecord
   end
 
   def self.international_rank(solution:, score:)
-    return 0 if with_solution(solution).count.zero?
+    players = with_solution(solution)
+    return 0 if players.count.zero?
 
-    position = with_solution(solution).where('score >= ?', score).count
+    position = won_with_solution(solution).where('score >= ?', score).count
     position = position.zero? ? 1 : position
-    "#{position}/#{with_solution(solution).count}"
+    "#{position}/#{players.count}"
   end
 
   def self.national_rank(solution:, country:, score:)
-    return 0 if with_solution(solution).count.zero?
+    players = with_solution(solution).country(country)
     return 0 if with_solution(solution).country(country).count.zero?
 
-    position = with_solution(solution).country(country).where('score >= ?', score).count
+    position = won_with_solution(solution).country(country).where('score >= ?', score).count
     position = position.zero? ? 1 : position
-    "#{position}/#{with_solution(solution).country(country).count}"
+    "#{position}/#{players.count}"
   end
 
   private

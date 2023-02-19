@@ -103,7 +103,7 @@ RSpec.describe Game, type: :model do
       create(:game, score: 19, country: 'Burundi', won: false)
       create(:game, score: 20, country: 'Burundi', solution: 'other')
 
-      expect(Game.national_rank(solution: 'solution', country: 'Burundi', score: 17)).to eq('2/5')
+      expect(Game.national_rank(solution: 'solution', country: 'Burundi', score: 12)).to eq('3/5')
     end
   end
 
@@ -118,7 +118,7 @@ RSpec.describe Game, type: :model do
       create(:game, score: 19, country: 'Burundi', won: false)
       create(:game, score: 20, country: 'Burundi', solution: 'other')
 
-      expect(Game.international_rank(solution: 'solution', score: 17)).to eq('3/7')
+      expect(Game.international_rank(solution: 'solution', score: 17)).to eq('2/7')
     end
   end
 end
