@@ -23,9 +23,10 @@ class Game < ApplicationRecord
   end
 
   def self.median_international_score(solution:)
-    return 0 if with_solution(solution).count.zero?
+    games = won_with_solution(solution)
+    return 0 if games.count.zero?
 
-    with_solution(solution).median(:score).round(2).to_s.gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1 ')
+    games.median(:score).round(2).to_s.gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1 ')
   end
 
   def self.median_national_score(solution:, country:)
