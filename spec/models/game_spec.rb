@@ -219,4 +219,38 @@ RSpec.describe Game, type: :model do
       )
     end
   end
+
+  describe '#players_by_country' do
+    it 'returns the top 5 countries with most players' do
+      create(:game, score: 20, country: 'Burundi', start_time: '2022-03-30T01:25:57+02:00Z')
+      create(:game, score: 21, country: 'Burundi', start_time: '2022-03-30T01:25:57+02:00Z')
+      create(:game, score: 22, country: 'Burundi', solution: 'other')
+      create(:game, score: 21, country: 'Burundi')
+      create(:game, score: 20, country: 'Burundi')
+      create(:game, score: 19, country: 'Burundi')
+      create(:game, score: 18, country: 'Burundi', won: false)
+      create(:game, score: 17, country: 'Burundi')
+      create(:game, score: 16, country: 'Belgium')
+      create(:game, score: 15, country: 'Belgium')
+      create(:game, score: 14, country: 'Belgium', won: false)
+      create(:game, score: 11, country: 'Belgium')
+      create(:game, score: 13, country: 'Rwanda')
+      create(:game, score: 12, country: 'Rwanda')
+      create(:game, score: 10, country: 'Rwanda')
+      create(:game, score: 10, country: 'France', won: false)
+      create(:game, score: 10, country: 'France')
+      create(:game, score: 10, country: 'Sweden')
+      create(:game, score: 10, country: 'Germany')
+
+      expect(Game.players_by_country(solution: 'solution')).to eq(
+        [
+          { rank: 1, country: 'Burundi', count: 5 },
+          { rank: 2, country: 'Belgium', count: 4 },
+          { rank: 3, country: 'Rwanda', count: 3 },
+          { rank: 4, country: 'France', count: 2 },
+          { rank: 5, country: 'Germany', count: 1 },
+        ],
+      )
+    end
+  end
 end

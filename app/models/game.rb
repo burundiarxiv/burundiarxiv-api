@@ -64,6 +64,17 @@ class Game < ApplicationRecord
       .with_index { |game, rank| { rank: rank + 1, score: game.score, country: game.country } }
   end
 
+  def self.players_by_country(solution:)
+    games = with_solution(solution)
+    games
+      .group(:country)
+      .count
+      .sort_by { |_country, count| -count }
+      .first(5)
+      .map
+      .with_index { |(country, count), rank| { rank: rank + 1, country: country, count: count } }
+  end
+
   private
 
   def should_compute_score?
