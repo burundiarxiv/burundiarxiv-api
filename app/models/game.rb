@@ -3,8 +3,10 @@
 class Game < ApplicationRecord
   before_save :compute_score, if: :should_compute_score?
 
+  # latest is where start_time is between yesterday and tomorrow
+  scope :latest, -> { where(start_time: (Time.current - 1.day)..(Time.current + 1.day)) }
   scope :won, -> { where(won: true) } # take into account start_time at 1970
-  scope :with_solution, ->(solution) { where(solution: solution) }
+  scope :with_solution, ->(solution) { latest.where(solution: solution) }
   scope :won_with_solution, ->(solution) { won.with_solution(solution) }
   scope :country, ->(country) { where(country: country) }
 

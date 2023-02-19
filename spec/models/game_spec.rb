@@ -85,6 +85,16 @@ RSpec.describe Game, type: :model do
 
       expect(Game.median_international_score(solution: 'solution')).to eq 0
     end
+
+    it 'does not take into account old games' do
+      create(:game, score: 20, country: 'Burundi', start_time: '2020-03-30T01:25:57+02:00Z')
+      create(:game, score: 21, country: 'France', start_time: '2020-03-30T01:25:57+02:00Z')
+      create(:game, score: 17, country: 'Burundi')
+      create(:game, score: 20, country: 'Burundi')
+      create(:game, score: 21, country: 'France')
+
+      expect(Game.median_international_score(solution: 'solution')).to eq('20.0')
+    end
   end
 
   describe '#median_national_score' do
@@ -114,6 +124,16 @@ RSpec.describe Game, type: :model do
 
       expect(Game.median_national_score(solution: 'solution', country: 'Burundi')).to eq 0
     end
+
+    it 'does not take into account old games' do
+      create(:game, score: 20, country: 'Burundi', start_time: '2020-03-30T01:25:57+02:00Z')
+      create(:game, score: 21, country: 'France', start_time: '2020-03-30T01:25:57+02:00Z')
+      create(:game, score: 17, country: 'Burundi')
+      create(:game, score: 20, country: 'Burundi')
+      create(:game, score: 21, country: 'France')
+
+      expect(Game.median_national_score(solution: 'solution', country: 'Burundi')).to eq('18.5')
+    end
   end
 
   describe '#national_rank' do
@@ -129,6 +149,16 @@ RSpec.describe Game, type: :model do
 
       expect(Game.national_rank(solution: 'solution', country: 'Burundi', score: 12)).to eq('3/5')
     end
+
+    it 'does not take into account old games' do
+      create(:game, score: 20, country: 'Burundi', start_time: '2020-03-30T01:25:57+02:00Z')
+      create(:game, score: 21, country: 'France', start_time: '2020-03-30T01:25:57+02:00Z')
+      create(:game, score: 17, country: 'Burundi')
+      create(:game, score: 20, country: 'Burundi')
+      create(:game, score: 21, country: 'France')
+
+      expect(Game.national_rank(solution: 'solution', score: 17, country: 'Burundi')).to eq('2/2')
+    end
   end
 
   describe '#international_national_rank' do
@@ -143,6 +173,15 @@ RSpec.describe Game, type: :model do
       create(:game, score: 20, country: 'Burundi', solution: 'other')
 
       expect(Game.international_rank(solution: 'solution', score: 17)).to eq('2/7')
+    end
+
+    it 'does not take into account old games' do
+      create(:game, score: 20, country: 'Canada', start_time: '2020-03-30T01:25:57+02:00Z')
+      create(:game, score: 21, country: 'Burundi', start_time: '2020-03-30T01:25:57+02:00Z')
+      create(:game, score: 17)
+      create(:game, score: 20)
+
+      expect(Game.international_rank(solution: 'solution', score: 17)).to eq('2/2')
     end
   end
 end
