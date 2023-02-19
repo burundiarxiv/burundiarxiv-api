@@ -61,13 +61,13 @@ RSpec.describe Game, type: :model do
 
   describe '#median_international_score' do
     it 'computes the median international score' do
-      create(:game, score: 7, country: 'France')
-      create(:game, score: 11, country: 'Canada')
-      create(:game, score: 19, country: 'Burundi')
-      create(:game, score: 20, country: 'Burundi', won: false)
-      create(:game, score: 20, country: 'Burundi', solution: 'other')
+      create(:game, score: 1007, country: 'France')
+      create(:game, score: 1011, country: 'Canada')
+      create(:game, score: 1019, country: 'Burundi')
+      create(:game, score: 1020, country: 'Burundi', won: false)
+      create(:game, score: 1020, country: 'Burundi', solution: 'other')
 
-      expect(Game.median_international_score(solution: 'solution')).to eq '11.0'
+      expect(Game.median_international_score(solution: 'solution')).to eq '1 011.0'
     end
 
     it 'handles non existing country' do
