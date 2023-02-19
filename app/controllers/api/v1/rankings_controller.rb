@@ -8,6 +8,7 @@ module Api
         @median_national_score = Game.median_national_score(solution: solution, country: country)
         @international_rank = Game.international_rank(solution: solution, score: score)
         @national_rank = Game.national_rank(solution: solution, country: country, score: score)
+        @best_players = Game.best_players(solution: solution)
       end
 
       private

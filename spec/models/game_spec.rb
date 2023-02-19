@@ -87,8 +87,8 @@ RSpec.describe Game, type: :model do
     end
 
     it 'does not take into account old games' do
-      create(:game, score: 20, country: 'Burundi', start_time: '2020-03-30T01:25:57+02:00Z')
-      create(:game, score: 21, country: 'France', start_time: '2020-03-30T01:25:57+02:00Z')
+      create(:game, score: 20, country: 'Burundi', start_time: '2022-03-30T01:25:57+02:00Z')
+      create(:game, score: 21, country: 'France', start_time: '2022-03-30T01:25:57+02:00Z')
       create(:game, score: 17, country: 'Burundi')
       create(:game, score: 20, country: 'Burundi')
       create(:game, score: 21, country: 'France')
@@ -126,8 +126,8 @@ RSpec.describe Game, type: :model do
     end
 
     it 'does not take into account old games' do
-      create(:game, score: 20, country: 'Burundi', start_time: '2020-03-30T01:25:57+02:00Z')
-      create(:game, score: 21, country: 'France', start_time: '2020-03-30T01:25:57+02:00Z')
+      create(:game, score: 20, country: 'Burundi', start_time: '2022-03-30T01:25:57+02:00Z')
+      create(:game, score: 21, country: 'France', start_time: '2022-03-30T01:25:57+02:00Z')
       create(:game, score: 17, country: 'Burundi')
       create(:game, score: 20, country: 'Burundi')
       create(:game, score: 21, country: 'France')
@@ -151,8 +151,8 @@ RSpec.describe Game, type: :model do
     end
 
     it 'does not take into account old games' do
-      create(:game, score: 20, country: 'Burundi', start_time: '2020-03-30T01:25:57+02:00Z')
-      create(:game, score: 21, country: 'France', start_time: '2020-03-30T01:25:57+02:00Z')
+      create(:game, score: 20, country: 'Burundi', start_time: '2022-03-30T01:25:57+02:00Z')
+      create(:game, score: 21, country: 'France', start_time: '2022-03-30T01:25:57+02:00Z')
       create(:game, score: 17, country: 'Burundi')
       create(:game, score: 20, country: 'Burundi')
       create(:game, score: 21, country: 'France')
@@ -176,8 +176,8 @@ RSpec.describe Game, type: :model do
     end
 
     it 'does not take into account old games' do
-      create(:game, score: 20, country: 'Canada', start_time: '2020-03-30T01:25:57+02:00Z')
-      create(:game, score: 21, country: 'Burundi', start_time: '2020-03-30T01:25:57+02:00Z')
+      create(:game, score: 20, country: 'Canada', start_time: '2022-03-30T01:25:57+02:00Z')
+      create(:game, score: 21, country: 'Burundi', start_time: '2022-03-30T01:25:57+02:00Z')
       create(:game, score: 17)
       create(:game, score: 20)
 
@@ -187,8 +187,8 @@ RSpec.describe Game, type: :model do
 
   describe '#best_players' do
     it 'returns the 10 best players for a given solution' do
-      create(:game, score: 20, country: 'Burundi', start_time: '2020-03-30T01:25:57+02:00Z')
-      create(:game, score: 21, country: 'Burundi', start_time: '2020-03-30T01:25:57+02:00Z')
+      create(:game, score: 20, country: 'Burundi', start_time: '2022-03-30T01:25:57+02:00Z')
+      create(:game, score: 21, country: 'Burundi', start_time: '2022-03-30T01:25:57+02:00Z')
       create(:game, score: 22, country: 'Burundi', solution: 'other')
       create(:game, score: 21, country: 'Burundi')
       create(:game, score: 20, country: 'Belgium')
