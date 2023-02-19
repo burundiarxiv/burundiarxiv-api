@@ -29,33 +29,28 @@ class Game < ApplicationRecord
   end
 
   def self.median_national_score(solution:, country:)
-    return 0 if with_solution(solution).count.zero?
-    return 0 if with_solution(solution).country(country).count.zero?
+    games = won_with_solution(solution).country(country)
+    return 0 if games.count.zero?
 
-    with_solution(solution)
-      .country(country)
-      .median(:score)
-      .round(2)
-      .to_s
-      .gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1 ')
+    games.median(:score).round(2).to_s.gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1 ')
   end
 
   def self.international_rank(solution:, score:)
-    players = with_solution(solution)
-    return 0 if players.count.zero?
+    games = with_solution(solution)
+    return 0 if games.count.zero?
 
     position = won_with_solution(solution).where('score >= ?', score).count
     position = position.zero? ? 1 : position
-    "#{position}/#{players.count}"
+    "#{position}/#{games.count}"
   end
 
   def self.national_rank(solution:, country:, score:)
-    players = with_solution(solution).country(country)
+    games = with_solution(solution).country(country)
     return 0 if with_solution(solution).country(country).count.zero?
 
     position = won_with_solution(solution).country(country).where('score >= ?', score).count
     position = position.zero? ? 1 : position
-    "#{position}/#{players.count}"
+    "#{position}/#{games.count}"
   end
 
   private
