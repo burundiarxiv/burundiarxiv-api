@@ -71,7 +71,7 @@ RSpec.describe Game, type: :model do
     end
 
     it 'handles non existing country' do
-      expect(Game.median_international_score(solution: 'solution')).to eq 0
+      expect(Game.median_international_score(solution: 'solution')).to eq '-'
     end
 
     it 'handles score with 1 won game' do
@@ -83,7 +83,7 @@ RSpec.describe Game, type: :model do
     it 'handles score with 1 lost game' do
       create(:game, score: 12, won: false, country: 'Burundi')
 
-      expect(Game.median_international_score(solution: 'solution')).to eq 0
+      expect(Game.median_international_score(solution: 'solution')).to eq '-'
     end
 
     it 'does not take into account old games' do
@@ -110,7 +110,7 @@ RSpec.describe Game, type: :model do
     end
 
     it 'handles non existing country' do
-      expect(Game.median_national_score(solution: 'solution', country: 'France')).to eq 0
+      expect(Game.median_national_score(solution: 'solution', country: 'France')).to eq '-'
     end
 
     it 'handles score with 1 won game' do
@@ -122,7 +122,7 @@ RSpec.describe Game, type: :model do
     it 'handles score with 1 lost game' do
       create(:game, score: 12, country: 'Burundi', won: false)
 
-      expect(Game.median_national_score(solution: 'solution', country: 'Burundi')).to eq 0
+      expect(Game.median_national_score(solution: 'solution', country: 'Burundi')).to eq '-'
     end
 
     it 'does not take into account old games' do
@@ -158,6 +158,13 @@ RSpec.describe Game, type: :model do
       create(:game, score: 21, country: 'France')
 
       expect(Game.national_rank(solution: 'solution', score: 17, country: 'Burundi')).to eq('2/2')
+    end
+
+    it 'displays 1/1 for one player' do
+      create(:game, score: 17)
+      create(:game, score: 17, country: 'Burundi')
+
+      expect(Game.national_rank(solution: 'solution', score: 17, country: 'Burundi')).to eq('1/1')
     end
   end
 
