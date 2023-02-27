@@ -27,14 +27,14 @@ class Game < ApplicationRecord
     games = won_with_solution(solution)
     return '-' if games.count.zero?
 
-    games.median(:score).round(2).to_s.gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1 ')
+    games.median(:score).round.to_s.gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1 ')
   end
 
   def self.median_national_score(solution:, country:)
     games = won_with_solution(solution).country(country)
     return '-' if games.count.zero?
 
-    games.median(:score).round(2).to_s.gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1 ')
+    games.median(:score).round.to_s.gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1 ')
   end
 
   def self.international_rank(solution:, score:)
