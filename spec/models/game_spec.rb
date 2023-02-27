@@ -67,7 +67,7 @@ RSpec.describe Game, type: :model do
       create(:game, score: 1020, country: 'Burundi', won: false)
       create(:game, score: 1020, country: 'Burundi', solution: 'other')
 
-      expect(Game.median_international_score(solution: 'solution')).to eq '1 011.0'
+      expect(Game.median_international_score(solution: 'solution')).to eq '1 011'
     end
 
     it 'handles non existing country' do
@@ -77,7 +77,7 @@ RSpec.describe Game, type: :model do
     it 'handles score with 1 won game' do
       create(:game, score: 12, country: 'Burundi')
 
-      expect(Game.median_international_score(solution: 'solution')).to eq '12.0'
+      expect(Game.median_international_score(solution: 'solution')).to eq '12'
     end
 
     it 'handles score with 1 lost game' do
@@ -93,7 +93,7 @@ RSpec.describe Game, type: :model do
       create(:game, score: 20, country: 'Burundi')
       create(:game, score: 21, country: 'France')
 
-      expect(Game.median_international_score(solution: 'solution')).to eq('20.0')
+      expect(Game.median_international_score(solution: 'solution')).to eq('20')
     end
   end
 
@@ -106,7 +106,7 @@ RSpec.describe Game, type: :model do
       create(:game, score: 20, country: 'Burundi', won: false)
       create(:game, score: 20, country: 'Burundi', solution: 'other')
 
-      expect(Game.median_national_score(solution: 'solution', country: 'Burundi')).to eq '15.5'
+      expect(Game.median_national_score(solution: 'solution', country: 'Burundi')).to eq '16'
     end
 
     it 'handles non existing country' do
@@ -116,7 +116,7 @@ RSpec.describe Game, type: :model do
     it 'handles score with 1 won game' do
       create(:game, score: 12, country: 'Burundi')
 
-      expect(Game.median_national_score(solution: 'solution', country: 'Burundi')).to eq '12.0'
+      expect(Game.median_national_score(solution: 'solution', country: 'Burundi')).to eq '12'
     end
 
     it 'handles score with 1 lost game' do
@@ -132,7 +132,7 @@ RSpec.describe Game, type: :model do
       create(:game, score: 20, country: 'Burundi')
       create(:game, score: 21, country: 'France')
 
-      expect(Game.median_national_score(solution: 'solution', country: 'Burundi')).to eq('18.5')
+      expect(Game.median_national_score(solution: 'solution', country: 'Burundi')).to eq('19')
     end
   end
 
