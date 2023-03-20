@@ -7,7 +7,7 @@ ruby '3.0.5'
 
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 6.1'
-gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
+gem 'rails', '~> 7.0.4'
 gem 'jbuilder', '~> 2.5'
 
 gem 'active_median'
