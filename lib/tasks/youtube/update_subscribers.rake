@@ -1,5 +1,5 @@
 namespace :yt do
-  desc 'Update subscribers count for a specific youtuber'
+  desc 'Update statistics for a specific youtuber'
   task :update_youtuber, [:channel_id] => :environment do |_task, args|
     channel_id = args[:channel_id]
     channel = Yt::Channel.new(id: channel_id)
