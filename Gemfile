@@ -3,11 +3,11 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.5'
+ruby '3.0.6'
 
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 6.1'
-gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
+gem 'puma', '~> 6.2'
+gem 'rails', '~> 7.0.4'
 gem 'jbuilder', '~> 2.5'
 
 gem 'active_median'
