@@ -29,31 +29,11 @@ namespace :yt do
     )
   end
 
-  desc 'Create videos for a specific youtuber'
-  task :create_videos, [:channel_id] => :environment do |_task, args|
+  desc 'Import videos for a specific youtuber'
+  task :import_videos, [:channel_id] => :environment do |_task, args|
     channel_id = args[:channel_id]
-    channel = Yt::Channel.new(id: channel_id)
+
     youtuber = Youtuber.find_by(channel_id: channel_id)
-
-    channel.videos.each do |video|
-      exising_video = Video.find_by(video_id: video.id)
-
-      if exising_video.nil?
-        Video.create!(
-          youtuber: youtuber,
-          video_id: video.id,
-          title: video.title,
-          description: video.description,
-          thumbnail: video.thumbnail_url(:high),
-          published_at: video.published_at,
-        )
-      else
-        exising_video.update!(
-          title: video.title,
-          description: video.description,
-          thumbnail: video.thumbnail_url(:high),
-        )
-      end
-    end
+    youtuber.import_videos
   end
 end
