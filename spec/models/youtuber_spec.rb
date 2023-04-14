@@ -16,4 +16,8 @@ RSpec.describe Youtuber, type: :model do
     it { should validate_presence_of(:channel_id) }
     it { should validate_uniqueness_of(:channel_id) }
   end
+
+  describe 'Associations' do
+    it { should have_many(:videos) }
+  end
 end
