@@ -10,62 +10,67 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_14_214059) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_14_214439) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'categories', force: :cascade do |t|
-    t.string 'name'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table 'datasets', force: :cascade do |t|
-    t.bigint 'category_id', null: false
-    t.string 'name'
-    t.integer 'slug'
-    t.string 'path'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['category_id'], name: 'index_datasets_on_category_id'
+  create_table "datasets", force: :cascade do |t|
+    t.bigint "category_id", null: false
+    t.string "name"
+    t.integer "slug"
+    t.string "path"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_datasets_on_category_id"
   end
 
-  create_table 'games', force: :cascade do |t|
-    t.string 'solution'
-    t.text 'guesses', default: [], array: true
-    t.boolean 'won'
-    t.datetime 'start_time', precision: nil
-    t.datetime 'end_time', precision: nil
-    t.string 'country'
-    t.integer 'time_taken'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.string 'timezone'
-    t.float 'score', default: 0.0
-    t.boolean 'latest', default: true
+  create_table "games", force: :cascade do |t|
+    t.string "solution"
+    t.text "guesses", default: [], array: true
+    t.boolean "won"
+    t.datetime "start_time", precision: nil
+    t.datetime "end_time", precision: nil
+    t.string "country"
+    t.integer "time_taken"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "timezone"
+    t.float "score", default: 0.0
+    t.boolean "latest", default: true
   end
 
-  create_table 'meanings', force: :cascade do |t|
-    t.string 'keyword', null: false
-    t.string 'meaning', null: false
-    t.string 'proverb', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "meanings", force: :cascade do |t|
+    t.string "keyword", null: false
+    t.string "meaning", null: false
+    t.string "proverb", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table 'missing_words', force: :cascade do |t|
-    t.string 'value'
-    t.integer 'count', default: 0
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "missing_words", force: :cascade do |t|
+    t.string "value"
+    t.integer "count", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table 'youtubers', force: :cascade do |t|
-    t.integer 'subscriber_count'
-    t.string 'channel_id'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "youtubers", force: :cascade do |t|
+    t.integer "subscriber_count"
+    t.string "channel_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+    t.integer "view_count"
+    t.integer "video_count"
+    t.string "thumbnail"
+    t.datetime "published_at"
   end
 
-  add_foreign_key 'datasets', 'categories'
+  add_foreign_key "datasets", "categories"
 end
