@@ -27,7 +27,7 @@ namespace :yt do
       video_count: channel.video_count,
       subscriber_count: channel.subscriber_count,
       published_at: channel.published_at,
-      thumbnail: channel.channel.thumbnail_url(:high),
+      thumbnail: channel.thumbnail_url(:high),
       description: channel.description,
     )
   end
