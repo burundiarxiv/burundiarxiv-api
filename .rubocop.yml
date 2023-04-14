@@ -292,6 +292,3 @@ Performance/DeleteSuffix:
 
 Performance/OpenStruct:
   Enabled: true
-
-Style/FrozenStringLiteralComment:
-  Enabled: false
