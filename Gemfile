@@ -13,6 +13,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'active_median'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rack-cors', require: 'rack/cors'
+gem 'yt'
+gem 'dotenv'
 
 group :development, :test do
   gem 'faker'
