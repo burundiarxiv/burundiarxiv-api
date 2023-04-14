@@ -10,27 +10,27 @@ AllCops:
   DisabledByDefault: true
   SuggestExtensions: false
   Exclude:
-    - "**/tmp/**/*"
-    - "**/templates/**/*"
-    - "**/vendor/**/*"
-    - "actionpack/lib/action_dispatch/journey/parser.rb"
-    - "actionmailbox/spec/dummy/**/*"
-    - "actiontext/spec/dummy/**/*"
-    - "**/node_modules/**/*"
+    - '**/tmp/**/*'
+    - '**/templates/**/*'
+    - '**/vendor/**/*'
+    - 'actionpack/lib/action_dispatch/journey/parser.rb'
+    - 'actionmailbox/spec/dummy/**/*'
+    - 'actiontext/spec/dummy/**/*'
+    - '**/node_modules/**/*'
 
 Performance:
   Exclude:
-    - "**/spec/**/*"
+    - '**/spec/**/*'
 
 # Prefer assert_not over assert !
 Rails/AssertNot:
   Include:
-    - "**/spec/**/*"
+    - '**/spec/**/*'
 
 # Prefer assert_not_x over refute_x
 Rails/RefuteMethods:
   Include:
-    - "**/spec/**/*"
+    - '**/spec/**/*'
 
 Rails/IndexBy:
   Enabled: true
@@ -149,14 +149,14 @@ Style/FrozenStringLiteralComment:
   Enabled: true
   EnforcedStyle: always
   Exclude:
-    - "actionview/spec/**/*.builder"
-    - "actionview/spec/**/*.ruby"
-    - "actionpack/spec/**/*.builder"
-    - "actionpack/spec/**/*.ruby"
-    - "activestorage/db/migrate/**/*.rb"
-    - "activestorage/db/update_migrate/**/*.rb"
-    - "actionmailbox/db/migrate/**/*.rb"
-    - "actiontext/db/migrate/**/*.rb"
+    - 'actionview/spec/**/*.builder'
+    - 'actionview/spec/**/*.ruby'
+    - 'actionpack/spec/**/*.builder'
+    - 'actionpack/spec/**/*.ruby'
+    - 'activestorage/db/migrate/**/*.rb'
+    - 'activestorage/db/update_migrate/**/*.rb'
+    - 'actionmailbox/db/migrate/**/*.rb'
+    - 'actiontext/db/migrate/**/*.rb'
 
 Style/MapToHash:
   Enabled: true
@@ -305,3 +305,6 @@ Performance/DeleteSuffix:
 
 Performance/OpenStruct:
   Enabled: true
+
+Style/FrozenStringLiteralComment:
+  Enabled: false

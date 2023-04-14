@@ -1,0 +1,2 @@
+class Youtuber < ApplicationRecord
+end
