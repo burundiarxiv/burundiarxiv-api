@@ -113,7 +113,6 @@ RSpec.describe Youtuber, type: :model do
         end
 
         it 'should update existing videos and create new ones' do
-          binding.pry
           expect { youtuber.import_videos }.to change(Video, :count).by(0)
 
           expect(youtuber.videos.length).to eq(2)
