@@ -10,6 +10,7 @@ RSpec.describe Video, type: :model do
   end
 
   describe 'Validations' do
+    subject { FactoryBot.build(:video) }
     it { should validate_presence_of(:video_id) }
     it { should validate_uniqueness_of(:video_id) }
   end

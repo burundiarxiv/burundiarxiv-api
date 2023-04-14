@@ -1,8 +1,9 @@
 FactoryBot.define do
   factory :video do
-    youtuber { nil }
-    title { "MyString" }
-    description { "MyString" }
-    thumbnail_url { "MyString" }
+    youtuber
+    video_id { 'MyString' }
+    title { 'MyString' }
+    description { 'MyString' }
+    thumbnail { 'MyString' }
   end
 end
