@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Top Youtube Channels - Burundi</title>
+    <!-- Add viewport meta tag for better mobile responsiveness -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Add Bootstrap CSS and Font Awesome icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+    />
+    <!-- Custom CSS -->
+    <style>
+      /* Center align the heading */
+      h1 {
+        text-align: center;
+      }
+
+      /* Add some padding and margin to the table */
+      table {
+        margin: 1rem auto;
+        border-spacing: 0;
+        width: 100%;
+        max-width: 40rem;
+        background-color: #fff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        border-radius: 0.25rem;
+        overflow: hidden;
+      }
+      th,
+      td {
+        padding: 0.5rem;
+      }
+
+      /* Use alternate row colors for better readability */
+      tbody tr:nth-of-type(even) {
+        background-color: #f7f7f7;
+      }
+
+      /* Style the table header cells */
+      th {
+        background-color: #007bff;
+        color: #fff;
+        text-align: left;
+        font-weight: bold;
+      }
+
+      /* Style the table cells */
+      td {
+        border-bottom: 1px solid #dee2e6;
+        vertical-align: middle;
+      }
+
+      /* Add some margin to the rank cell for better alignment */
+      td:first-child {
+        margin-left: 0.5rem;
+      }
+
+      /* Hide the rank number on small screens */
+      @media (max-width: 575.98px) {
+        .rank {
+          display: none;
+        }
+
+        td:first-child {
+          margin-left: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <%= yield %>
+
+    <!-- Add Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
