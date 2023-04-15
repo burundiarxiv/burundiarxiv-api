@@ -1,10 +1,9 @@
 {
-  "dependencies": {
-    "@prettier/plugin-ruby": "^2.0.0",
-    "prettier": "^2.6.0"
-  },
   "devDependencies": {
+    "@prettier/plugin-ruby": "^1.6.1",
     "husky": "^7.0.4",
-    "lint-staged": "^12.3.7"
+    "lint-staged": "^12.3.7",
+    "prettier": "^2.2.1",
+    "prettier-plugin-erb": "^0.4.0"
   }
 }
