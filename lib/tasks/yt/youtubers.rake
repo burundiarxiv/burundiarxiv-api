@@ -1,11 +1,4 @@
 namespace :yt do
-  desc 'Update statistics for a specific youtuber'
-  task :update_youtuber, [:channel_id] => :environment do |_task, args|
-    channel_id = args[:channel_id]
-    youtuber = Youtuber.find_by(channel_id: channel_id)
-    youtuber.update_statistics
-  end
-
   desc 'Create a new youtuber'
   task :create_youtuber, [:channel_id] => :environment do |_task, args|
     channel_id = args[:channel_id]
@@ -23,5 +16,15 @@ namespace :yt do
         description: channel.description,
       )
     youtuber.import_videos
+  end
+
+  desc 'Update statistics for all youtubers'
+  task update_youtubers: :environment do
+    Youtuber.find_each { |youtuber| youtuber.update_statistics }
+  end
+
+  desc 'Import videos for all youtubers'
+  task import_videos: :environment do
+    Youtuber.find_each { |youtuber| youtuber.import_videos }
   end
 end
