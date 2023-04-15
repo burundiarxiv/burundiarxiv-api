@@ -1,6 +1,8 @@
 class UpdateYoutuberStatisticsJob < ApplicationJob
   def perform
     Youtuber.find_each do |youtuber|
+      youtuber.update_statistics
+
       channel = youtuber.channel
 
       stats = {
