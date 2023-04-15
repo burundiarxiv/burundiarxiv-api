@@ -11,7 +11,7 @@ class UpdateVideoStatisticsJob < ApplicationJob
         comment_count: yt_video.comment_count,
       }
 
-      video_statistic = video.video_statistics.find_or_initialize_by(date: Date.today)
+      video_statistic = video.video_statistics.find_or_initialize_by(date: Date.current)
       video_statistic.assign_attributes(stats)
       video_statistic.save!
     end
