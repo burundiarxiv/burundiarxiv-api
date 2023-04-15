@@ -21,7 +21,7 @@
     <tbody>
       <% @youtuber.statistics.each do |statistic| %>
         <tr>
-          <td><%= statistic.date %></td>
+          <td><%= statistic.date %> <%= statistic.date.strftime('%a') %></td>
           <td><%= number_with_delimiter(statistic.subscriber_count, delimiter: ' ') %></td>
           <td><%= number_with_delimiter(statistic.view_count, delimiter: ' ') %></td>
           <td><%= statistic.estimated_earnings %></td>
