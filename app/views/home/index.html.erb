@@ -13,13 +13,16 @@
     </tr>
   </thead>
   <tbody>
-    <% @youtubers.each.with_index(1) do |youtuber, index| %>
+      <% @youtubers.each.with_index(1) do |youtuber, index| %>
       <tr>
         <td><%= index %></span></td>
-        <td><%= youtuber.title %></td>
-        <td><%= youtuber.subscriber_count %></td>
-        <td><%= youtuber.view_count %></td>
-        <td><%= youtuber.video_count %></td>
+        <td>
+          <%= image_tag youtuber.thumbnail, width: 50, height: 50 %>
+          <%= youtuber.title %>
+        </td>
+        <td><%= number_with_delimiter(youtuber.subscriber_count, delimiter: ' ') %></td>
+        <td><%= number_with_delimiter(youtuber.view_count, delimiter: ' ') %></td>
+        <td><%= number_with_delimiter(youtuber.video_count, delimiter: ' ') %></td>
         <td><%= youtuber.published_at.strftime('%b %-d, %Y') %></td>
       </tr>
     <% end %>
