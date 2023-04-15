@@ -10,10 +10,8 @@ RSpec.describe Api::V1::MissingWordsController do
     end
 
     it 'creates a new missing word' do
-      expect { post :create, params: { word: { value: 'test' } } }.to change(
-        MissingWord,
-        :count,
-      ).by(1)
+      expect { post :create, params: { word: { value: 'test' } } }.to change(MissingWord, :count)
+        .by(1)
     end
 
     it 'sets the count at 1 for a new missing word' do
@@ -24,7 +22,7 @@ RSpec.describe Api::V1::MissingWordsController do
 
   describe 'GET index' do
     it 'responds 200' do
-      get :index
+      get :index, format: :json
       expect(response).to have_http_status(:success)
     end
 
@@ -32,10 +30,7 @@ RSpec.describe Api::V1::MissingWordsController do
       create(:missing_word)
       get :index, format: :json
       expect(JSON.parse(response.body)).to eq(
-        {
-          'count' => 1,
-          'missing_words' => [{ 'value' => 'test', 'count' => 1 }],
-        },
+        { 'count' => 1, 'missing_words' => [{ 'value' => 'test', 'count' => 1 }] },
       )
     end
 

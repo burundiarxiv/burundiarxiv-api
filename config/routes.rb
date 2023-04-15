@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get '/home/index', to: 'home#index'
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :datasets, only: [:index]
@@ -11,4 +12,6 @@ Rails.application.routes.draw do
       resources :sms_forwarders, only: %i[create]
     end
   end
+
+  root 'home#index'
 end

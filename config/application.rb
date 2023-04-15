@@ -34,7 +34,7 @@ module BurundiarxivApi
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
-    config.api_only = true
+    config.api_only = false
 
     # config.active_record.default_timezone = :local
     # config.active_record.time_zone_aware_attributes = false

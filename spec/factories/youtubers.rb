@@ -4,5 +4,10 @@ FactoryBot.define do
     sequence :channel_id do |n|
       "channel_#{n}"
     end
+    view_count { 1 }
+    video_count { 1 }
+    sequence :title do |n|
+      "title_#{n}"
+    end
   end
 end
