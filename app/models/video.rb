@@ -3,4 +3,8 @@ class Video < ApplicationRecord
 
   belongs_to :youtuber
   has_many :video_statistics, dependent: :destroy
+
+  def statistics
+    video_statistics.order(:date).last
+  end
 end
