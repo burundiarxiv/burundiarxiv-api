@@ -1,5 +1,3 @@
-# spec/jobs/update_video_statistics_job_spec.rb
-
 require 'rails_helper'
 
 RSpec.describe UpdateVideoStatisticsJob, type: :job do
