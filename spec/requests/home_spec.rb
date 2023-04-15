@@ -6,5 +6,11 @@ RSpec.describe 'Homes', type: :request do
       get '/home/index'
       expect(response).to have_http_status(:success)
     end
+
+    it 'renders the index with some data' do
+      get '/home/index'
+      expect(response.body).to include('Rank')
+      expect(response.body).to include('Youtuber')
+    end
   end
 end
