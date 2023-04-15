@@ -1,5 +1,3 @@
-require 'yt'
-
 class UpdateVideoStatisticsJob < ApplicationJob
   def perform
     Youtuber.find_each do |youtuber|
