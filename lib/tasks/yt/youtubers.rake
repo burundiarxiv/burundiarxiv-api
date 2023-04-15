@@ -27,4 +27,9 @@ namespace :yt do
   task import_videos: :environment do
     Youtuber.find_each { |youtuber| youtuber.import_videos }
   end
+
+  desc 'Update video statistics for all youtubers'
+  task update_video_statistics: :environment do
+    UpdateVideoStatisticsJob.perform_now
+  end
 end

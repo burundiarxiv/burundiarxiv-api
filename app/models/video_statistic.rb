@@ -9,5 +9,6 @@ class VideoStatistic < ApplicationRecord
             :comment_count,
             numericality: {
               only_integer: true,
-            }
+            },
+            allow_nil: true
 end
