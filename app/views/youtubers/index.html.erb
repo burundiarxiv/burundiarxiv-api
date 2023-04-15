@@ -1,0 +1,32 @@
+<div class="container">
+<h1>Top Youtube Channels - Burundi</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Rank</th>
+      <th scope="col">Youtuber</th>
+      <th scope="col">Subscribers</th>
+      <th scope="col">Views Count</th>
+      <th scope="col">Video Count</th>
+      <th scope="col">Published At</th>
+    </tr>
+  </thead>
+  <tbody>
+      <% @youtubers.each.with_index(1) do |youtuber, index| %>
+      <tr>
+        <td><%= index %></span></td>
+        <td>
+          <%= link_to youtuber_path(youtuber) do %>
+            <%= image_tag youtuber.thumbnail, width: 50, height: 50 %> <%= youtuber.title %>
+          <% end %>
+        </td>
+        <td><%= number_with_delimiter(youtuber.subscriber_count, delimiter: ' ') %></td>
+        <td><%= number_with_delimiter(youtuber.view_count, delimiter: ' ') %></td>
+        <td><%= number_with_delimiter(youtuber.video_count, delimiter: ' ') %></td>
+        <td><%= youtuber.published_at.strftime('%b %-d, %Y') %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

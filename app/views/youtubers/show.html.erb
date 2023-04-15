@@ -1,0 +1,34 @@
+<div class="container">
+  <%= image_tag @youtuber.thumbnail, width: 100, height: 100 %>
+  <h1><%= @youtuber.title %></h1>
+  <p><%= @youtuber.description %></p>
+  <p>Subscribers: <%= @youtuber.subscriber_count %></p>
+  <p>Views: <%= @youtuber.view_count %></p>
+  <p>Videos: <%= @youtuber.video_count %></p>
+  <p>Youtuber since: <%= @youtuber.published_at.strftime('%b %-d, %Y') %></p>
+
+  <h2>Statistics</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">DATE</th>
+        <th scope="col">SUBSCRIBERS</th>
+        <th scope="col">VIDEO VIEWS</th>
+        <th scope="col">ESTIMATED EARNINGS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @youtuber.statistics.each do |statistic| %>
+        <tr>
+          <td><%= statistic.date %></td>
+          <td><%= statistic.view_count %></td>
+          <td><%= statistic.estimated_earnings %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h2><%= @youtuber.title %> total subscribers count stats</h2>
+  <h2><%= @youtuber.title %> total video views count stats</h2>
+</div>

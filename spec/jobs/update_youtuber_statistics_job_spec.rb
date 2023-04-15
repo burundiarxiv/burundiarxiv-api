@@ -15,7 +15,7 @@ RSpec.describe UpdateYoutuberStatisticsJob, type: :job do
       expect { described_class.perform_now }.to change { YoutuberStatistic.count }.by(1)
 
       # Ensure the correct youtuber statistic was created or updated with the expected data
-      youtuber_statistic = youtuber.youtuber_statistics.find_by(date: Date.today)
+      youtuber_statistic = youtuber.youtuber_statistics.find_by(date: Date.current)
       expect(youtuber_statistic).not_to be_nil
       expect(youtuber_statistic.view_count).to eq(channel.view_count)
       expect(youtuber_statistic.video_count).to eq(channel.video_count)

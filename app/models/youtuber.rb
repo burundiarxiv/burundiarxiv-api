@@ -25,6 +25,10 @@ class Youtuber < ApplicationRecord
     end
   end
 
+  def statistics
+    youtuber_statistics.order(date: :desc)
+  end
+
   def update_statistics
     update!(
       view_count: channel.view_count,
