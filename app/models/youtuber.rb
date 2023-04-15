@@ -2,6 +2,7 @@ class Youtuber < ApplicationRecord
   validates :channel_id, presence: true, uniqueness: true
 
   has_many :videos, dependent: :destroy
+  has_many :youtuber_statistics, dependent: :destroy
 
   def import_videos
     channel.videos.each do |video|
