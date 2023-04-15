@@ -24,7 +24,7 @@ RSpec.describe Youtuber, type: :model do
   describe '#import_videos' do
     context 'when importing a channel\'s videos' do
       let(:channel) { Yt::Channel.new(id: 'example_channel_id') }
-      let(:youtuber) { FactoryBot.create(:youtuber) }
+      let(:youtuber) { create(:youtuber) }
 
       before do
         allow(Yt::Channel).to receive(:new).and_return(channel)
@@ -70,7 +70,7 @@ RSpec.describe Youtuber, type: :model do
           allow(Video).to receive(:find_by)
             .with(video_id: '111')
             .and_return(
-              FactoryBot.create(
+              create(
                 :video,
                 video_id: '111',
                 youtuber: youtuber,
@@ -81,7 +81,7 @@ RSpec.describe Youtuber, type: :model do
           allow(Video).to receive(:find_by)
             .with(video_id: '222')
             .and_return(
-              FactoryBot.create(
+              create(
                 :video,
                 video_id: '222',
                 youtuber: youtuber,
