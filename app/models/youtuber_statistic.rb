@@ -9,4 +9,23 @@ class YoutuberStatistic < ApplicationRecord
               only_integer: true,
             },
             presence: true
+
+  def estimated_earnings
+    # 1.compute videos views difference between the date of this statistic and the date of the previous statistic
+    # 2. multiply the difference by the average earnings per 1000 views
+    # 3. return the result
+
+    # 1.
+    previous_statistic =
+      youtuber.youtuber_statistics.where('date < ?', date).order(date: :desc).first
+
+    # return 0 if previous_statistic.nil?
+
+    views_difference = view_count # - previous_statistic.view_count
+
+    min_earnings = (views_difference * 0.25) / 1_000
+    max_earnings = (views_difference * 4.00) / 1_000
+
+    { min_earnings: min_earnings, max_earnings: max_earnings }
+  end
 end
