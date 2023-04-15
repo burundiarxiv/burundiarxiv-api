@@ -1,6 +1,8 @@
 FactoryBot.define do
   factory :youtuber do
     subscriber_count { 1 }
-    channel_id { 'MyString' }
+    sequence :channel_id do |n|
+      "channel_#{n}"
+    end
   end
 end

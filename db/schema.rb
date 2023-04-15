@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_14_224205) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_14_234932) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -60,6 +60,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_14_224205) do
     t.datetime 'updated_at', null: false
   end
 
+  create_table 'video_statistics', force: :cascade do |t|
+    t.bigint 'video_id', null: false
+    t.integer 'view_count'
+    t.integer 'like_count'
+    t.integer 'dislike_count'
+    t.integer 'favorite_count'
+    t.integer 'comment_count'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.date 'date', null: false
+    t.index ['video_id'], name: 'index_video_statistics_on_video_id'
+  end
+
   create_table 'videos', force: :cascade do |t|
     t.bigint 'youtuber_id', null: false
     t.string 'title'
@@ -86,5 +99,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_14_224205) do
   end
 
   add_foreign_key 'datasets', 'categories'
+  add_foreign_key 'video_statistics', 'videos'
   add_foreign_key 'videos', 'youtubers'
 end

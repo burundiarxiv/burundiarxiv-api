@@ -24,6 +24,14 @@ class Youtuber < ApplicationRecord
     end
   end
 
+  def update_statistics
+    update!(
+      view_count: channel.view_count,
+      video_count: channel.video_count,
+      subscriber_count: channel.subscriber_count,
+    )
+  end
+
   def channel
     @channel ||= Yt::Channel.new(id: channel_id)
   end
