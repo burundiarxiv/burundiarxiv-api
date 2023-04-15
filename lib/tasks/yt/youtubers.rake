@@ -32,4 +32,9 @@ namespace :yt do
   task update_video_statistics: :environment do
     UpdateVideoStatisticsJob.perform_now
   end
+
+  desc 'Update youtuber statistics for all youtubers'
+  task update_youtuber_statistics: :environment do
+    UpdateYoutuberStatisticsJob.perform_now
+  end
 end

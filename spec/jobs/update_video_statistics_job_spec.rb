@@ -1,15 +1,13 @@
-# spec/jobs/update_video_statistics_job_spec.rb
-
 require 'rails_helper'
 
 RSpec.describe UpdateVideoStatisticsJob, type: :job do
   describe '#perform' do
     # We'll create youtubers and their videos as test data
-    let!(:youtuber1) { FactoryBot.create(:youtuber) }
-    let!(:youtuber2) { FactoryBot.create(:youtuber) }
-    let!(:video1_1) { FactoryBot.create(:video, youtuber: youtuber1) }
-    let!(:video1_2) { FactoryBot.create(:video, youtuber: youtuber1) }
-    let!(:video2_1) { FactoryBot.create(:video, youtuber: youtuber2) }
+    let!(:youtuber1) { create(:youtuber) }
+    let!(:youtuber2) { create(:youtuber) }
+    let!(:video1_1) { create(:video, youtuber: youtuber1) }
+    let!(:video1_2) { create(:video, youtuber: youtuber1) }
+    let!(:video2_1) { create(:video, youtuber: youtuber2) }
 
     before do
       # Stub Yt::Video.new(id: video.video_id) so that no actual calls are made in our tests
