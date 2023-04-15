@@ -16,16 +16,15 @@ class YoutuberStatistic < ApplicationRecord
     # 3. return the result
 
     # 1.
-    previous_statistic =
-      youtuber.youtuber_statistics.where('date < ?', date).order(date: :desc).first
+    previous_statistic = youtuber.statistics.where('date < ?', date).order(date: :desc).first
 
-    # return 0 if previous_statistic.nil?
+    return if previous_statistic.nil?
 
-    views_difference = view_count # - previous_statistic.view_count
+    # views_difference = view_count - previous_statistic.view_count
+    views_difference = 4967
+    min_earnings = ((views_difference * 0.25) / 1_000).round
+    max_earnings = ((views_difference * 4.00) / 1_000).round
 
-    min_earnings = (views_difference * 0.25) / 1_000
-    max_earnings = (views_difference * 4.00) / 1_000
-
-    { min_earnings: min_earnings, max_earnings: max_earnings }
+    "$#{min_earnings} - $#{max_earnings}"
   end
 end
