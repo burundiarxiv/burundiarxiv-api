@@ -3,23 +3,23 @@
 <table>
   <thead>
     <tr>
-      <th>Rank</th>
-      <th>Youtuber</th>
-      <th>Subscribers</th>
-      <th>Views Views</th>
-      <th>Video Count</th>
-      <th>Published At</th>
+      <th scope="col">Rank</th>
+      <th scope="col">Youtuber</th>
+      <th scope="col">Subscribers</th>
+      <th scope="col">Views</th>
+      <th scope="col">Video Count</th>
+      <th scope="col">Published At</th>
     </tr>
   </thead>
   <tbody>
-    <% @youtubers.each_with_index do |youtuber, index| %>
+    <% @youtubers.each.with_index(1) do |youtuber, index| %>
       <tr>
-        <td><%= index + 1 %></td>
+        <td><%= index %></td>
         <td><%= youtuber.title %></td>
         <td><%= youtuber.subscriber_count %></td>
         <td><%= youtuber.view_count %></td>
         <td><%= youtuber.video_count %></td>
-        <td><%= youtuber.published_at %></td>
+        <td><%= youtuber.published_at.strftime('%b %-d, %Y') %></td><!-- Format date in a human-readable way -->
       </tr>
     <% end %>
   </tbody>
