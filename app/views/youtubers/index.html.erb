@@ -17,8 +17,9 @@
       <tr>
         <td><%= index %></span></td>
         <td>
-          <%= image_tag youtuber.thumbnail, width: 50, height: 50 %>
-          <%= youtuber.title %>
+          <%= link_to youtuber_path(youtuber) do %>
+            <%= image_tag youtuber.thumbnail, width: 50, height: 50 %> <%= youtuber.title %>
+          <% end %>
         </td>
         <td><%= number_with_delimiter(youtuber.subscriber_count, delimiter: ' ') %></td>
         <td><%= number_with_delimiter(youtuber.view_count, delimiter: ' ') %></td>
