@@ -16,6 +16,8 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'yt'
 gem 'dotenv'
 gem 'scout_apm'
+gem 'rollbar'
+
 
 group :development, :test do
   gem 'faker'
