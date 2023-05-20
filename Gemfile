@@ -15,6 +15,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rack-cors', require: 'rack/cors'
 gem 'yt'
 gem 'dotenv'
+gem 'scout_apm'
 
 group :development, :test do
   gem 'faker'
