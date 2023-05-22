@@ -3,11 +3,12 @@
 class Game < ApplicationRecord
   before_save :compute_score, if: :should_compute_score?
 
-  scope :latest, -> { where(start_time: (Time.current - 1.day)..(Time.current + 1.day)) }
-  scope :won, -> { where(won: true) } # take into account start_time at 1970
-  scope :with_solution, ->(solution) { latest.where(solution: solution) }
-  scope :won_with_solution, ->(solution) { won.with_solution(solution) }
   scope :country, ->(country) { where(country: country) }
+  scope :latest, -> { where(start_time: (Time.current - 1.day)..(Time.current + 1.day)) }
+  scope :with_solution, ->(solution) { latest.where(solution: solution) }
+  scope :won_above_score, ->(score) { where("score >= ?", score) }
+  scope :won_with_solution, ->(solution) { won.with_solution(solution) }
+  scope :won, -> { where(won: true) } # take into account start_time at 1970
 
   def start_time
     read_attribute(:start_time)&.in_time_zone(timezone)

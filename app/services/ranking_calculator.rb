@@ -14,7 +14,7 @@ class RankingCalculator
     def international_rank
       return "-" if @games_with_solution.empty?
 
-      position = @games_won_with_solution.where("score >= ?", @score).count.nonzero? || 1
+      position = @games_won_with_solution.won_above_score(@score).count.nonzero? || 1
       "#{position}/#{@games_with_solution.size}"
     end
 
@@ -22,7 +22,7 @@ class RankingCalculator
       games = @games_with_solution.country(@country)
       return "-" if games.empty?
       position =
-        @games_won_with_solution.country(@country).where("score >= ?", @score).count.nonzero? || 1
+        @games_won_with_solution.country(@country).won_above_score(@score).count.nonzero? || 1
 
       "#{position}/#{games.size}"
     end
