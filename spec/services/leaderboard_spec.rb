@@ -22,20 +22,6 @@ RSpec.describe Leaderboard do
       create(:game, score: 11, country: "Burundi")
       create(:game, score: 10, country: "Germany")
 
-      # expect(Game.best_players(solution: "solution")).to eq(
-      #   [
-      #     { rank: 1, score: 21.0, country: "Burundi" },
-      #     { rank: 2, score: 20.0, country: "Belgium" },
-      #     { rank: 3, score: 19.0, country: "Burundi" },
-      #     { rank: 4, score: 18.0, country: "Rwanda" },
-      #     { rank: 5, score: 17.0, country: "France" },
-      #     { rank: 6, score: 16.0, country: "Burundi" },
-      #     { rank: 7, score: 15.0, country: "Sweden" },
-      #     { rank: 8, score: 14.0, country: "Burundi" },
-      #     { rank: 9, score: 13.0, country: "Burundi" },
-      #     { rank: 10, score: 12.0, country: "Canada" },
-      #   ],
-      # )
       expect(
         described_class.call(
           games_with_solution: games_with_solution,
