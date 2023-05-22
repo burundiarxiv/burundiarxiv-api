@@ -92,7 +92,6 @@ RSpec.describe MedianScoreCalculator do
         create(:game, score: 20, country: "Burundi", won: false)
         create(:game, score: 20, country: "Burundi", solution: "other")
 
-        # expect(Game.median_national_score(solution: "solution", country: "Burundi")).to eq "16"
         expect(
           described_class.call(games: games_won_with_solution, country: "Burundi")[:national_score],
         ).to eq "16"
