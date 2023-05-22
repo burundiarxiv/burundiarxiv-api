@@ -1,5 +1,4 @@
-# .github/workflows/rspec.yml
-name: tests
+name: Tests
 on: push
 
 jobs:
