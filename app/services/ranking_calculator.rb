@@ -6,7 +6,7 @@ class RankingCalculator
       @score = score
       @country = country
 
-      [international_rank, national_rank]
+      { international_rank: international_rank, national_rank: national_rank }
     end
 
     private
