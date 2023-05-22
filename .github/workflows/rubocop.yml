@@ -1,0 +1,27 @@
+name: "Run linters"
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  rubocop:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: rubocop
+        uses: andrewmcodes/rubocop-linter-action@v3.2.0
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          action_config_path: ".github/config/rubocop_linter_action.yml"
+
+  brakeman:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: brakeman
+        uses: devmasx/brakeman-linter-action@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
