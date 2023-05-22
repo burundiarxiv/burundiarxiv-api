@@ -24,12 +24,11 @@ class Game < ApplicationRecord
   end
 
   def self.best_players(solution:)
-    games = won_with_solution(solution)
-    games
+    won_with_solution(solution)
       .order(score: :desc)
       .limit(10)
       .map
-      .with_index { |game, rank| { rank: rank + 1, score: game.score, country: game.country } }
+      .with_index(1) { |game, rank| { rank: rank, score: game.score, country: game.country } }
   end
 
   def self.players_by_country(solution:)
