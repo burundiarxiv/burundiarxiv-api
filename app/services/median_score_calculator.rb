@@ -2,7 +2,8 @@ class MedianScoreCalculator
   class << self
     def call(games:, country:)
       @games = games
-      [international_score, national_score(country: country)]
+
+      { international_score: international_score, national_score: national_score(country: country) }
     end
 
     private

@@ -5,7 +5,9 @@ module Api
     class RankingsController < ApplicationController
       def index
         @median_international_score, @median_national_score =
-          MedianScoreCalculator.call(games: games_won_with_solution, country: country)
+          MedianScoreCalculator
+            .call(games: games_won_with_solution, country: country)
+            .values_at(:international_score, :national_score)
 
         @international_rank, @national_rank =
           RankingCalculator
