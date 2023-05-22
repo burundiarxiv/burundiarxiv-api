@@ -7,18 +7,16 @@ module Api
         @median_international_score, @median_national_score =
           MedianScoreCalculator.call(games: games_won_with_solution, country: country)
 
-        # @international_rank = Game.international_rank(solution: solution, score: score)
-        # @national_rank = Game.national_rank(solution: solution, country: country, score: score)
-
-        # @games_with_solution = Game.with_solution(solution)
-        # @games_won_with_solution = Game.won_with_solution(solution)
         @international_rank, @national_rank =
-          RankingCalculator.call(
-            games_with_solution: games_with_solution,
-            games_won_with_solution: games_won_with_solution,
-            country: country,
-            score: score,
-          )
+          RankingCalculator
+            .call(
+              games_with_solution: games_with_solution,
+              games_won_with_solution: games_won_with_solution,
+              country: country,
+              score: score,
+            )
+            .values_at(:international_rank, :national_rank)
+
         @best_players = Game.best_players(solution: solution)
         @players_by_country = Game.players_by_country(solution: solution)
       end
