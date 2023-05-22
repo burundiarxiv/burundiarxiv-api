@@ -19,8 +19,11 @@ module Api
             )
             .values_at(:international_rank, :national_rank)
 
-        @best_players = Game.best_players(solution: solution)
-        @players_by_country = Game.players_by_country(solution: solution)
+        # @best_players = Game.best_players(solution: solution)
+        # @players_by_country = Game.players_by_country(solution: solution)
+
+        @best_players, @players_by_country =
+          Leaderboard.call(solution: solution).values_at(:best_players, :players_by_country)
       end
 
       private
