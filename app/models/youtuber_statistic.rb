@@ -11,7 +11,7 @@ class YoutuberStatistic < ApplicationRecord
             presence: true
 
   def estimated_earnings
-    previous_statistic = youtuber.statistics.where('date < ?', date).order(date: :desc).first
+    previous_statistic = youtuber.statistics.where("date < ?", date).order(date: :desc).first
 
     return if previous_statistic.nil?
 

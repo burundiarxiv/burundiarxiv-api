@@ -1,10 +1,29 @@
-# .github/workflows/rspec.yml
-name: tests
+name: CI
 on: push
-
 jobs:
+  rubocop:
+    name: Rubocop
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true
+          rubygems: latest
+      - run: bundle exec rubocop
+
+  brakeman:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Brakeman
+        uses: devmasx/brakeman-linter-action@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
   build:
-    name: rspec
+    name: All Tests
     runs-on: ubuntu-latest
 
     services:

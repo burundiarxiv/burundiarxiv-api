@@ -9,7 +9,7 @@ FactoryBot.define do
     sequence :title do |n|
       "title_#{n}"
     end
-    thumbnail { 'MyString' }
-    published_at { '2018-10-01 00:00:00' }
+    thumbnail { "MyString" }
+    published_at { "2018-10-01 00:00:00" }
   end
 end

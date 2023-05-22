@@ -4,6 +4,6 @@ FactoryBot.define do
     view_count { 1 }
     video_count { 1 }
     subscriber_count { 1 }
-    date { '2023-04-15' }
+    date { "2023-04-15" }
   end
 end

@@ -17,5 +17,5 @@ Rails
 
     resources :youtubers, only: %i[index show]
 
-    root to: 'youtubers#index'
+    root to: "youtubers#index"
   end

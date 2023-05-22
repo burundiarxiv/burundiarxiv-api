@@ -1,7 +1,7 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe VideoStatistic, type: :model do
-  describe 'database columns' do
+  describe "database columns" do
     it { should have_db_column(:view_count).of_type(:integer) }
     it { should have_db_column(:like_count).of_type(:integer) }
     it { should have_db_column(:dislike_count).of_type(:integer) }
@@ -10,7 +10,7 @@ RSpec.describe VideoStatistic, type: :model do
     it { should have_db_column(:date).of_type(:date) }
   end
 
-  describe 'Validations' do
+  describe "Validations" do
     it { should validate_numericality_of(:view_count).only_integer }
     it { should validate_numericality_of(:like_count).only_integer }
     it { should validate_numericality_of(:dislike_count).only_integer }
@@ -19,7 +19,7 @@ RSpec.describe VideoStatistic, type: :model do
     it { should validate_presence_of(:date) }
   end
 
-  describe 'Associations' do
+  describe "Associations" do
     it { should belong_to(:video) }
   end
 end
