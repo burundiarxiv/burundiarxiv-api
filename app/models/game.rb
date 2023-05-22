@@ -8,7 +8,7 @@ class Game < ApplicationRecord
   scope :with_solution, ->(solution) { latest.where(solution: solution) }
   scope :won_above_score, ->(score) { where("score >= ?", score) }
   scope :won_with_solution, ->(solution) { won.with_solution(solution) }
-  scope :won, -> { where(won: true) } # take into account start_time at 1970
+  scope :won, -> { where(won: true) }
 
   def start_time
     read_attribute(:start_time)&.in_time_zone(timezone)
