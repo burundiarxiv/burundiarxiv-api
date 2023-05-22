@@ -34,7 +34,7 @@ RSpec.describe MedianScoreCalculator do
         create(:game, score: 1020, country: "Burundi", solution: "other")
 
         expect(
-          described_class.call(games: Game.won_with_solution("solution"), country: "Burundi")[
+          described_class.call(games: games_won_with_solution, country: "Burundi")[
             :international_score
           ],
         ).to eq "1 011"
@@ -42,7 +42,7 @@ RSpec.describe MedianScoreCalculator do
 
       it "handles non existing country" do
         expect(
-          described_class.call(games: Game.won_with_solution("solution"), country: "France")[
+          described_class.call(games: games_won_with_solution, country: "France")[
             :international_score
           ],
         ).to eq "-"
@@ -52,7 +52,7 @@ RSpec.describe MedianScoreCalculator do
         create(:game, score: 12, country: "Burundi")
 
         expect(
-          described_class.call(games: Game.won_with_solution("solution"), country: "Burundi")[
+          described_class.call(games: games_won_with_solution, country: "Burundi")[
             :international_score
           ],
         ).to eq "12"
@@ -62,7 +62,7 @@ RSpec.describe MedianScoreCalculator do
         create(:game, score: 12, won: false, country: "Burundi")
 
         expect(
-          described_class.call(games: Game.won_with_solution("solution"), country: "Burundi")[
+          described_class.call(games: games_won_with_solution, country: "Burundi")[
             :international_score
           ],
         ).to eq "-"
@@ -76,7 +76,7 @@ RSpec.describe MedianScoreCalculator do
         create(:game, score: 21, country: "France")
 
         expect(
-          described_class.call(games: Game.won_with_solution("solution"), country: "Burundi")[
+          described_class.call(games: games_won_with_solution, country: "Burundi")[
             :international_score
           ],
         ).to eq("20")
@@ -94,17 +94,13 @@ RSpec.describe MedianScoreCalculator do
 
         # expect(Game.median_national_score(solution: "solution", country: "Burundi")).to eq "16"
         expect(
-          described_class.call(games: Game.won_with_solution("solution"), country: "Burundi")[
-            :national_score
-          ],
+          described_class.call(games: games_won_with_solution, country: "Burundi")[:national_score],
         ).to eq "16"
       end
 
       it "handles non existing country" do
         expect(
-          described_class.call(games: Game.won_with_solution("solution"), country: "France")[
-            :national_score
-          ],
+          described_class.call(games: games_won_with_solution, country: "France")[:national_score],
         ).to eq "-"
       end
 
@@ -112,9 +108,7 @@ RSpec.describe MedianScoreCalculator do
         create(:game, score: 12, country: "Burundi")
 
         expect(
-          described_class.call(games: Game.won_with_solution("solution"), country: "Burundi")[
-            :national_score
-          ],
+          described_class.call(games: games_won_with_solution, country: "Burundi")[:national_score],
         ).to eq "12"
       end
 
@@ -122,9 +116,7 @@ RSpec.describe MedianScoreCalculator do
         create(:game, score: 12, country: "Burundi", won: false)
 
         expect(
-          described_class.call(games: Game.won_with_solution("solution"), country: "Burundi")[
-            :national_score
-          ],
+          described_class.call(games: games_won_with_solution, country: "Burundi")[:national_score],
         ).to eq("-")
       end
 
@@ -136,9 +128,7 @@ RSpec.describe MedianScoreCalculator do
         create(:game, score: 21, country: "France")
 
         expect(
-          described_class.call(games: Game.won_with_solution("solution"), country: "Burundi")[
-            :national_score
-          ],
+          described_class.call(games: games_won_with_solution, country: "Burundi")[:national_score],
         ).to eq("19")
       end
     end
