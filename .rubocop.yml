@@ -10,27 +10,27 @@ AllCops:
   DisabledByDefault: true
   SuggestExtensions: false
   Exclude:
-    - '**/tmp/**/*'
-    - '**/templates/**/*'
-    - '**/vendor/**/*'
-    - 'actionpack/lib/action_dispatch/journey/parser.rb'
-    - 'actionmailbox/spec/dummy/**/*'
-    - 'actiontext/spec/dummy/**/*'
-    - '**/node_modules/**/*'
+    - "**/tmp/**/*"
+    - "**/templates/**/*"
+    - "**/vendor/**/*"
+    - "actionpack/lib/action_dispatch/journey/parser.rb"
+    - "actionmailbox/spec/dummy/**/*"
+    - "actiontext/spec/dummy/**/*"
+    - "**/node_modules/**/*"
 
 Performance:
   Exclude:
-    - '**/spec/**/*'
+    - "**/spec/**/*"
 
 # Prefer assert_not over assert !
 Rails/AssertNot:
   Include:
-    - '**/spec/**/*'
+    - "**/spec/**/*"
 
 # Prefer assert_not_x over refute_x
 Rails/RefuteMethods:
   Include:
-    - '**/spec/**/*'
+    - "**/spec/**/*"
 
 Rails/IndexBy:
   Enabled: true
@@ -167,9 +167,8 @@ Layout/SpaceInsideHashLiteralBraces:
 Layout/SpaceInsideParens:
   Enabled: true
 
-# Check quotes usage according to lint rule below.
 Style/StringLiterals:
-  Enabled: true
+  EnforcedStyle: double_quotes
 
 # Detect hard tabs, no hard tabs.
 Layout/IndentationStyle:
