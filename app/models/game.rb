@@ -23,20 +23,6 @@ class Game < ApplicationRecord
     self.score = time_taken * guesses.length
   end
 
-  def self.median_international_score(solution:)
-    games = won_with_solution(solution)
-    return "-" if games.count.zero?
-
-    games.median(:score).round.to_s.gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1 ')
-  end
-
-  def self.median_national_score(solution:, country:)
-    games = won_with_solution(solution).country(country)
-    return "-" if games.count.zero?
-
-    games.median(:score).round.to_s.gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1 ')
-  end
-
   def self.international_rank(solution:, score:)
     games = with_solution(solution)
     return "-" if games.count.zero?

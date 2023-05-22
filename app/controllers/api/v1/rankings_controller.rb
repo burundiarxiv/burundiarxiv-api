@@ -4,8 +4,9 @@ module Api
   module V1
     class RankingsController < ApplicationController
       def index
-        @median_international_score = Game.median_international_score(solution: solution)
-        @median_national_score = Game.median_national_score(solution: solution, country: country)
+        @median_international_score, @median_national_score =
+          MedianScoreCalculator.call(games: games, country: country)
+
         @international_rank = Game.international_rank(solution: solution, score: score)
         @national_rank = Game.national_rank(solution: solution, country: country, score: score)
         @best_players = Game.best_players(solution: solution)
@@ -13,6 +14,10 @@ module Api
       end
 
       private
+
+      def games
+        @games ||= Game.won_with_solution(solution)
+      end
 
       def solution
         params.require(:solution)
