@@ -12,20 +12,19 @@ class RankingCalculator
     private
 
     def international_rank
-      return "-" if @games_with_solution.count.zero?
+      return "-" if @games_with_solution.empty?
 
-      position = @games_won_with_solution.where("score >= ?", @score).count
-      position = position.zero? ? 1 : position
-      "#{position}/#{@games_with_solution.count}"
+      position = @games_won_with_solution.where("score >= ?", @score).count.nonzero? || 1
+      "#{position}/#{@games_with_solution.size}"
     end
 
     def national_rank
       games = @games_with_solution.country(@country)
-      return "-" if games.count.zero?
+      return "-" if games.empty?
+      position =
+        @games_won_with_solution.country(@country).where("score >= ?", @score).count.nonzero? || 1
 
-      position = @games_won_with_solution.country(@country).where("score >= ?", @score).count
-      position = position.zero? ? 1 : position
-      "#{position}/#{games.count}"
+      "#{position}/#{games.size}"
     end
   end
 end
