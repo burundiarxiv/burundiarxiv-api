@@ -4,28 +4,19 @@ module Api
   module V1
     class RankingsController < ApplicationController
       def index
-        @median_international_score, @median_national_score =
-          MedianScoreCalculator
-            .call(games: games_won_with_solution, country: country)
-            .values_at(:international_score, :national_score)
-
-        @international_rank, @national_rank =
-          RankingCalculator
-            .call(
-              games_with_solution: games_with_solution,
-              games_won_with_solution: games_won_with_solution,
-              country: country,
-              score: score,
-            )
-            .values_at(:international_rank, :national_rank)
-
-        @best_players, @players_by_country =
-          Leaderboard
-            .call(
-              games_with_solution: games_with_solution,
-              games_won_with_solution: games_won_with_solution,
-            )
-            .values_at(:best_players, :players_by_country)
+        rankings =
+          RankingsService.call(
+            games_with_solution: games_with_solution,
+            games_won_with_solution: games_won_with_solution,
+            country: country,
+            score: score,
+          )
+        @median_international_score = rankings[:international_score]
+        @median_national_score = rankings[:national_score]
+        @international_rank = rankings[:international_rank]
+        @national_rank = rankings[:national_rank]
+        @best_players = rankings[:best_players]
+        @players_by_country = rankings[:players_by_country]
       end
 
       private
