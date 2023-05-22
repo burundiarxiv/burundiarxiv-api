@@ -1,6 +1,9 @@
 require "rails_helper"
 
 RSpec.describe RankingCalculator do
+  let(:games_with_solution) { Game.with_solution("solution") }
+  let(:games_won_with_solution) { Game.won_with_solution("solution") }
+
   describe ".call" do
     it "returns the international rank and the national rank" do
       create(:game, score: 18, country: "Burundi")
@@ -11,9 +14,6 @@ RSpec.describe RankingCalculator do
       create(:game, score: 7, country: "France")
       create(:game, score: 19, country: "Burundi", won: false)
       create(:game, score: 20, country: "Burundi", solution: "other")
-
-      games_with_solution = Game.with_solution("solution")
-      games_won_with_solution = Game.won_with_solution("solution")
 
       expect(
         described_class.call(
@@ -26,9 +26,6 @@ RSpec.describe RankingCalculator do
     end
 
     it "returns a dash when there is no game" do
-      games_with_solution = Game.with_solution("solution")
-      games_won_with_solution = Game.won_with_solution("solution")
-
       expect(
         described_class.call(
           games_with_solution: games_with_solution,
@@ -50,9 +47,6 @@ RSpec.describe RankingCalculator do
         create(:game, score: 19, country: "Burundi", won: false)
         create(:game, score: 20, country: "Burundi", solution: "other")
 
-        games_with_solution = Game.with_solution("solution")
-        games_won_with_solution = Game.won_with_solution("solution")
-
         expect(
           described_class.call(
             games_with_solution: games_with_solution,
@@ -72,9 +66,6 @@ RSpec.describe RankingCalculator do
         create(:game, score: 20, country: "Burundi")
         create(:game, score: 21, country: "France")
 
-        games_with_solution = Game.with_solution("solution")
-        games_won_with_solution = Game.won_with_solution("solution")
-
         expect(
           described_class.call(
             games_with_solution: games_with_solution,
@@ -90,9 +81,6 @@ RSpec.describe RankingCalculator do
       it "displays 1/1 for one player" do
         create(:game, score: 17)
         create(:game, score: 17, country: "Burundi")
-
-        games_with_solution = Game.with_solution("solution")
-        games_won_with_solution = Game.won_with_solution("solution")
 
         expect(
           described_class.call(
@@ -118,9 +106,6 @@ RSpec.describe RankingCalculator do
         create(:game, score: 19, country: "Burundi", won: false)
         create(:game, score: 20, country: "Burundi", solution: "other")
 
-        games_with_solution = Game.with_solution("solution")
-        games_won_with_solution = Game.won_with_solution("solution")
-
         expect(
           described_class.call(
             games_with_solution: games_with_solution,
@@ -138,9 +123,6 @@ RSpec.describe RankingCalculator do
         create(:game, score: 21, country: "Burundi", start_time: "2022-03-30T01:25:57+02:00Z")
         create(:game, score: 17)
         create(:game, score: 20)
-
-        games_with_solution = Game.with_solution("solution")
-        games_won_with_solution = Game.won_with_solution("solution")
 
         expect(
           described_class.call(
