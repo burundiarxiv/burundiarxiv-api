@@ -23,24 +23,6 @@ class Game < ApplicationRecord
     self.score = time_taken * guesses.length
   end
 
-  def self.best_players(solution:)
-    won_with_solution(solution)
-      .order(score: :desc)
-      .limit(10)
-      .map
-      .with_index(1) { |game, rank| { rank: rank, score: game.score, country: game.country } }
-  end
-
-  def self.players_by_country(solution:)
-    with_solution(solution)
-      .group_by(&:country)
-      .transform_values(&:count)
-      .sort_by { |country, count| [-count, country] }
-      .first(10)
-      .map
-      .with_index(1) { |(country, count), rank| { rank: rank, country: country, count: count } }
-  end
-
   private
 
   def should_compute_score?
