@@ -23,23 +23,23 @@ class Game < ApplicationRecord
     self.score = time_taken * guesses.length
   end
 
-  def self.international_rank(solution:, score:)
-    games = with_solution(solution)
-    return "-" if games.count.zero?
+  # def self.international_rank(solution:, score:)
+  #   games = with_solution(solution)
+  #   return "-" if games.count.zero?
 
-    position = won_with_solution(solution).where("score >= ?", score).count
-    position = position.zero? ? 1 : position
-    "#{position}/#{games.count}"
-  end
+  #   position = won_with_solution(solution).where("score >= ?", score).count
+  #   position = position.zero? ? 1 : position
+  #   "#{position}/#{games.count}"
+  # end
 
-  def self.national_rank(solution:, country:, score:)
-    games = with_solution(solution).country(country)
-    return "-" if with_solution(solution).country(country).count.zero?
+  # def self.national_rank(solution:, country:, score:)
+  #   games = with_solution(solution).country(country)
+  #   return "-" if with_solution(solution).country(country).count.zero?
 
-    position = won_with_solution(solution).country(country).where("score >= ?", score).count
-    position = position.zero? ? 1 : position
-    "#{position}/#{games.count}"
-  end
+  #   position = won_with_solution(solution).country(country).where("score >= ?", score).count
+  #   position = position.zero? ? 1 : position
+  #   "#{position}/#{games.count}"
+  # end
 
   def self.best_players(solution:)
     games = won_with_solution(solution)
