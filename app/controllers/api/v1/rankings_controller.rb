@@ -3,9 +3,11 @@
 module Api
   module V1
     class RankingsController < ApplicationController
-      before_action :set_median_scores, :set_rankings, :set_leaderboards
-
-      def index; end
+      def index
+        set_median_scores
+        set_rankings
+        set_leaderboards
+      end
 
       private
 
