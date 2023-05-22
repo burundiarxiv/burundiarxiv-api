@@ -1,4 +1,6 @@
 class MedianScoreCalculator
+  THOUSANDS_SEPARATOR_REGEX = /(\d)(?=(\d\d\d)+(?!\d))/
+
   class << self
     def call(games:, country:)
       @games = games
@@ -22,7 +24,7 @@ class MedianScoreCalculator
     end
 
     def score(games)
-      games.median(:score).round.to_s.gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1 ')
+      games.median(:score).round.to_s.gsub(THOUSANDS_SEPARATOR_REGEX, '\\1 ')
     end
   end
 end
