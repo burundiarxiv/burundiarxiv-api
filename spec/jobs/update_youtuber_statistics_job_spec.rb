@@ -1,16 +1,16 @@
 # spec/jobs/update_youtuber_statistics_job_spec.rb
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe UpdateYoutuberStatisticsJob, type: :job do
-  describe '#perform' do
+  describe "#perform" do
     # We'll create a youtuber and channel as test data
-    let!(:channel) { double('channel', view_count: 100, video_count: 10, subscriber_count: 20) }
+    let!(:channel) { double("channel", view_count: 100, video_count: 10, subscriber_count: 20) }
     let!(:youtuber) { create(:youtuber) }
 
     before { allow_any_instance_of(Youtuber).to receive(:channel).and_return(channel) }
 
-    it 'updates youtuber statistics with the current date and channel data' do
+    it "updates youtuber statistics with the current date and channel data" do
       # Enqueue the job and perform the assertions on the results
       expect { described_class.perform_now }.to change { YoutuberStatistic.count }.by(1)
 

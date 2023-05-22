@@ -5,8 +5,8 @@ FactoryBot.define do
     sequence (:video_id) do |n|
       "video_#{n}"
     end
-    title { 'MyString' }
-    description { 'MyString' }
-    thumbnail { 'MyString' }
+    title { "MyString" }
+    description { "MyString" }
+    thumbnail { "MyString" }
   end
 end

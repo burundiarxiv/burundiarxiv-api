@@ -2,13 +2,13 @@
 
 FactoryBot.define do
   factory :game do
-    solution { 'solution' }
+    solution { "solution" }
     guesses { %w[guess-1 guess-2] }
     won { true }
     start_time { Time.current }
     end_time { 10.minutes.from_now }
-    country { 'France' }
+    country { "France" }
     time_taken { 10 }
-    timezone { 'Europe/Paris' }
+    timezone { "Europe/Paris" }
   end
 end

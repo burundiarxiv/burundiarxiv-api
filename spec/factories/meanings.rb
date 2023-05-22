@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :meaning do
-    keyword { 'keyword' }
-    meaning { 'meaning' }
-    proverb { 'proverb' }
+    keyword { "keyword" }
+    meaning { "meaning" }
+    proverb { "proverb" }
   end
 end

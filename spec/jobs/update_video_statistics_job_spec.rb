@@ -1,7 +1,7 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe UpdateVideoStatisticsJob, type: :job do
-  describe '#perform' do
+  describe "#perform" do
     # We'll create youtubers and their videos as test data
     let!(:youtuber1) { create(:youtuber) }
     let!(:youtuber2) { create(:youtuber) }
@@ -18,7 +18,7 @@ RSpec.describe UpdateVideoStatisticsJob, type: :job do
       allow_any_instance_of(Yt::Video).to receive(:comment_count).and_return(4)
     end
 
-    it 'updates video statistics for all videos' do
+    it "updates video statistics for all videos" do
       # Call perform on the job
       UpdateVideoStatisticsJob.perform_now
 

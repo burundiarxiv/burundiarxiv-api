@@ -6,6 +6,6 @@ FactoryBot.define do
     dislike_count { 1 }
     favorite_count { 1 }
     comment_count { 1 }
-    date { '2021-04-14' }
+    date { "2021-04-14" }
   end
 end
