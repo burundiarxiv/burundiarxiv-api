@@ -1,3 +1,6 @@
 # Burundiarxiv - API
 
-This app serves only to download the csv files of datasets
+Rails application containing:
+
+- The backend of ijambo.app: Wordle game in Kirundi
+- The Statistics of Burundian Youtubers
