@@ -3,6 +3,16 @@
 require "rails_helper"
 
 RSpec.describe Game, type: :model do
+  describe "validations" do
+    it { should validate_presence_of(:country) }
+    it { should validate_presence_of(:score) }
+    it { should validate_presence_of(:solution) }
+
+    it { should allow_value(true).for(:won) }
+    it { should allow_value(false).for(:won) }
+    it { should_not allow_value(nil).for(:won) }
+  end
+
   describe "#start_time" do
     it "returns the start_time with in the correct timezone : Europe/Paris" do
       game = create(:game, start_time: "2022-03-30T01:25:57+02:00Z", timezone: "Europe/Paris")

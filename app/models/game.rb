@@ -10,6 +10,9 @@ class Game < ApplicationRecord
   scope :won_with_solution, ->(solution) { won.with_solution(solution) }
   scope :won, -> { where(won: true) }
 
+  validates :won, inclusion: { in: [true, false] }
+  validates :solution, :country, :score, presence: true
+
   def start_time
     read_attribute(:start_time)&.in_time_zone(timezone)
   end
