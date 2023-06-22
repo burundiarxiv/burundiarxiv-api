@@ -20,7 +20,7 @@ gem "rollbar"
 
 
 group :development, :test do
-  gem 'brakeman', ">=5.2.1", require: false
+  gem "brakeman", ">=5.2.1", require: false
   gem "faker"
   gem "pry-byebug"
   gem "factory_bot_rails"
