@@ -43,6 +43,7 @@ RSpec.describe Api::V1::GamesController do
                start_time: "2022-03-30T01:25:57+02:00Z",
                time_taken: 80,
                won: true,
+               solution: "INSWA",
              },
            }
 
@@ -84,9 +85,7 @@ RSpec.describe Api::V1::GamesController do
 
       get :index, format: :json
 
-      expect(
-        JSON.parse(response.body)["games"].map { |game| game["id"] },
-      ).to eq [3, 2, 1]
+      expect(JSON.parse(response.body)["games"].map { |game| game["id"] }).to eq [3, 2, 1]
     end
 
     it "computes score when it is equal to zero" do
