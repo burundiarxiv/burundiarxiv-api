@@ -12,6 +12,9 @@ Rails
         resources :missing_words, only: %i[index create]
         resources :rankings, only: %i[index]
         resources :sms_forwarders, only: %i[create]
+        namespace :curura do
+          resources :rankings, only: %i[index]
+        end
       end
     end
 
