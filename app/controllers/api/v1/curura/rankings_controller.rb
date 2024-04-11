@@ -5,7 +5,6 @@ module Api
     module Curura
       class RankingsController < ApplicationController
         def index
-          binding.pry
           set_rankings
           set_leaderboards
         end
@@ -14,14 +13,14 @@ module Api
 
         def set_rankings
           @international_rank, @national_rank =
-            RankingCalculator
+            ::Curura::RankingCalculator
               .call(games: games, country: country, score: score)
               .values_at(:international_rank, :national_rank)
         end
 
         def set_leaderboards
           @best_players, @players_by_country =
-            Curura::Leaderboard.call(games: games).values_at(:best_players, :players_by_country)
+            ::Curura::Leaderboard.call(games: games).values_at(:best_players, :players_by_country)
         end
 
         def games
