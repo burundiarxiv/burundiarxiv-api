@@ -24,8 +24,7 @@ module Api
         end
 
         def games
-          binding.pry
-          @games ||= CururaGame.today
+          @games ||= ::Curura::Game.today
         end
 
         def country
