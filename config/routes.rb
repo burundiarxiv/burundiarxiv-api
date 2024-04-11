@@ -14,6 +14,7 @@ Rails
         resources :sms_forwarders, only: %i[create]
         namespace :curura do
           resources :rankings, only: %i[index]
+          resources :games, only: %i[create]
         end
       end
     end
