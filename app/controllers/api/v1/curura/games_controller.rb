@@ -11,7 +11,7 @@ module Api
         private
 
         def game_params
-          params.require(:game).permit(:country, :score, :timezone)
+          params.require(:game).permit(:country, :score, :timezone, :start_time)
         end
       end
     end
