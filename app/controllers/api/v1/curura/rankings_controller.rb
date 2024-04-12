@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require_dependency "curura/ranking_calculator"
+require_dependency "curura/leaderboard"
+
 module Api
   module V1
     module Curura
@@ -28,11 +31,11 @@ module Api
         end
 
         def country
-          @country ||= params.require(:country)
+          @country ||= params.require(:country) if params[:country].present?
         end
 
         def score
-          params.require(:score).to_i
+          params.require(:score).to_i if params[:score].present?
         end
       end
     end
