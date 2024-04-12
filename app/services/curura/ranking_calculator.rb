@@ -12,7 +12,7 @@ module Curura
       private
 
       def international_rank
-        return "-" if @games.empty?
+        return "-" if @games.empty? || @score.nil?
 
         position = @games.won_above_score(@score).count.nonzero? || 1
         "#{position}/#{@games.size}"
