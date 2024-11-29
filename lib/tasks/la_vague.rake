@@ -24,7 +24,8 @@ namespace :la_vague do
     booking_hour = ENV["BOOKING_HOUR"] || "12:15"
 
     # Helper to perform the booking for a user
-    def book_for_user(browser, username, password, date, hour)
+    def book_for_user(username, password, date, hour)
+      browser = Watir::Browser.new
       browser.goto "https://member.resamania.com/equalia-lavagueCPS/"
       browser.button(value: "Log in").click
       sleep 10
@@ -64,14 +65,13 @@ namespace :la_vague do
       button = aquagym_tonic_card.buttons.find { |btn| btn.text.match?(/BOOK/i) }
       button.click if button
       sleep 10
+      browser.close
     end
 
     # Booking for both users
-    browser = Watir::Browser.new
     begin
       puts "Booking for User 1..."
       book_for_user(
-        browser,
         ENV["LA_VAGUE_USERNAME_LIONEL"],
         ENV["LA_VAGUE_PASSWORD_LIONEL"],
         booking_date,
@@ -84,7 +84,6 @@ namespace :la_vague do
       puts "Booking for User 2..."
 
       book_for_user(
-        browser,
         ENV["LA_VAGUE_USERNAME_PARTNER"],
         ENV["LA_VAGUE_PASSWORD_PARTNER"],
         booking_date,
@@ -95,8 +94,6 @@ namespace :la_vague do
       puts "Aquagym tonic session successfully booked for both users on #{booking_date} at #{booking_hour}."
     rescue StandardError => e
       puts "An error occurred: #{e.message}"
-    ensure
-      browser.close
     end
   end
 end
