@@ -17,6 +17,7 @@ gem "yt"
 gem "dotenv"
 gem "scout_apm"
 gem "rollbar"
+gem "watir"
 
 
 group :development, :test do
