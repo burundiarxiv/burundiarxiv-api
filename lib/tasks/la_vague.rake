@@ -92,7 +92,7 @@ namespace :la_vague do
 
       puts "Booking for User 2..."
 
-      # book_for_user(ENV["LA_VAGUE_USERNAME_ANNAMARIA"], ENV["LA_VAGUE_PASSWORD_ANNAMARIA"])
+      book_for_user(ENV["LA_VAGUE_USERNAME_ANNAMARIA"], ENV["LA_VAGUE_PASSWORD_ANNAMARIA"])
       puts "Successfully booked for User 2."
 
       puts "#{course} session successfully booked for both users on #{booking_date} at #{booking_hour}."
