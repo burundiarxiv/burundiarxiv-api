@@ -7,7 +7,7 @@ namespace :la_vague do
   task :book do
     Dotenv.load
 
-    current_time = Time.now
+    # current_time = Time.now
 
     # unless current_time.wday == 2
     #   puts "The script only runs on Tuesday. Exiting."
