@@ -20,11 +20,19 @@ namespace :la_vague do
       today + 7 # Always book for the next Tuesday
     end
 
-    booking_date = ENV["BOOKING_DATE"] || calculate_booking_date.strftime("%Y-%m-%d")
-    booking_hour = ENV["BOOKING_HOUR"] || "12:15"
+    def course
+      ENV["COURSE"] || "Aquagym tonic"
+    end
 
-    # Helper to perform the booking for a user
-    def book_for_user(username, password, date, hour)
+    def booking_hour
+      ENV["BOOKING_HOUR"] || "12:15"
+    end
+
+    def booking_date
+      ENV["BOOKING_DATE"] || calculate_booking_date.strftime("%Y-%m-%d")
+    end
+
+    def book_for_user(username, password)
       browser = Watir::Browser.new
       browser.goto "https://member.resamania.com/equalia-lavagueCPS/"
       browser.button(value: "Log in").click
@@ -43,7 +51,7 @@ namespace :la_vague do
       sleep 10
 
       link =
-        "https://member.resamania.com/equalia-lavagueCPS/planning?club=%2Fequalia%2Fclubs%2F1238&startedAt=#{date}"
+        "https://member.resamania.com/equalia-lavagueCPS/planning?club=%2Fequalia%2Fclubs%2F1238&startedAt=#{booking_date}"
       browser.goto link
       sleep 10
 
@@ -58,7 +66,8 @@ namespace :la_vague do
 
       aquagym_tonic_card =
         grid_divs.find do |card|
-          card.text.gsub(/\s+/, " ").match?(/#{course}.*#{hour}.*BOOK/i) && card.text.size < 200
+          card.text.gsub(/\s+/, " ").match?(/#{course}.*#{booking_hour}.*BOOK/i) &&
+            card.text.size < 200
         end
       raise "No available slots found!" unless aquagym_tonic_card
 
@@ -71,27 +80,17 @@ namespace :la_vague do
     # Booking for both users
     begin
       puts "Booking for User 1..."
-      book_for_user(
-        ENV["LA_VAGUE_USERNAME_LIONEL"],
-        ENV["LA_VAGUE_PASSWORD_LIONEL"],
-        booking_date,
-        booking_hour,
-      )
+      book_for_user(ENV["LA_VAGUE_USERNAME_LIONEL"], ENV["LA_VAGUE_PASSWORD_LIONEL"])
       puts "Successfully booked for User 1."
 
       sleep 10
 
       puts "Booking for User 2..."
 
-      book_for_user(
-        ENV["LA_VAGUE_USERNAME_ANNAMARIA"],
-        ENV["LA_VAGUE_PASSWORD_ANNAMARIA"],
-        booking_date,
-        booking_hour,
-      )
+      book_for_user(ENV["LA_VAGUE_USERNAME_ANNAMARIA"], ENV["LA_VAGUE_PASSWORD_ANNAMARIA"])
       puts "Successfully booked for User 2."
 
-      puts "Aquagym tonic session successfully booked for both users on #{booking_date} at #{booking_hour}."
+      puts "#{course} session successfully booked for both users on #{booking_date} at #{booking_hour}."
     rescue StandardError => e
       puts "An error occurred: #{e.message}"
     end
