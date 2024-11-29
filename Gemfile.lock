@@ -119,6 +119,7 @@ GEM
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
+    logger (1.6.1)
     loofah (2.23.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -211,6 +212,7 @@ GEM
     regexp_parser (2.9.2)
     reline (0.5.11)
       io-console (~> 0.5)
+    rexml (3.3.9)
     rollbar (3.5.2)
     rspec-core (3.13.2)
       rspec-support (~> 3.13.0)
@@ -260,8 +262,15 @@ GEM
       rubocop-capybara (~> 2.17)
       rubocop-factory_bot (~> 2.22)
     ruby-progressbar (1.13.0)
+    rubyzip (2.3.2)
     scout_apm (5.3.8)
       parser
+    selenium-webdriver (4.27.0)
+      base64 (~> 0.2)
+      logger (~> 1.4)
+      rexml (~> 3.2, >= 3.2.5)
+      rubyzip (>= 1.2.2, < 3.0)
+      websocket (~> 1.0)
     shoulda-matchers (6.4.0)
       activesupport (>= 5.2.0)
     spring (4.1.1)
@@ -274,6 +283,10 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.6.0)
+    watir (7.3.0)
+      regexp_parser (>= 1.2, < 3)
+      selenium-webdriver (~> 4.2)
+    websocket (1.2.11)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -311,6 +324,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.1.0)
   tzinfo-data
+  watir
   yt
 
 RUBY VERSION
