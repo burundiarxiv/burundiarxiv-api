@@ -14,10 +14,10 @@ namespace :la_vague do
     #   exit
     # end
 
-    # Calculate the target booking date (Tuesday of next week)
+    # Calculate the target booking date (next week)
     def calculate_booking_date
       today = Date.today
-      today + 7 # Always book for the next Tuesday
+      today + 7 # Always book for the next week
     end
 
     def course
