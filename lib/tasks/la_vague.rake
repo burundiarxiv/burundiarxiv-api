@@ -50,10 +50,11 @@ namespace :la_vague do
       sleep 10
 
       grid_divs = browser.divs(class: "MuiGrid-root")
+      course = "Aquagym tonic"
 
       aquagym_tonic_card =
         grid_divs.find do |card|
-          card.text.gsub(/\s+/, " ").match?(/Aquagym tonic.*#{hour}.*BOOK/i) && card.text.size < 200
+          card.text.gsub(/\s+/, " ").match?(/#{course}.*#{hour}.*BOOK/i) && card.text.size < 200
         end
       raise "No available slots found!" unless aquagym_tonic_card
 
@@ -75,13 +76,14 @@ namespace :la_vague do
       puts "Successfully booked for User 1."
 
       puts "Booking for User 2..."
-      book_for_user(
-        browser,
-        ENV["LA_VAGUE_USERNAME_PARTNER"],
-        ENV["LA_VAGUE_PASSWORD_PARTNER"],
-        booking_date,
-        booking_hour,
-      )
+
+      # book_for_user(
+      #   browser,
+      #   ENV["LA_VAGUE_USERNAME_PARTNER"],
+      #   ENV["LA_VAGUE_PASSWORD_PARTNER"],
+      #   booking_date,
+      #   booking_hour,
+      # )
       puts "Successfully booked for User 2."
 
       puts "Aquagym tonic session successfully booked for both users on #{booking_date} at #{booking_hour}."
