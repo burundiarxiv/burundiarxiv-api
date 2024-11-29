@@ -7,8 +7,8 @@ namespace :la_vague do
   task :book do
     Dotenv.load
 
-    date = ENV["BOOKING_DATE"] || "2024-11-27" # Default to specified date
-    hour = ENV["BOOKING_HOUR"] || "20:15" # Default to specified hour
+    date = ENV["BOOKING_DATE"] || "2024-11-27"
+    hour = ENV["BOOKING_HOUR"] || "20:15"
 
     browser = Watir::Browser.new
 
