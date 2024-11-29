@@ -84,8 +84,8 @@ namespace :la_vague do
       puts "Booking for User 2..."
 
       book_for_user(
-        ENV["LA_VAGUE_USERNAME_PARTNER"],
-        ENV["LA_VAGUE_PASSWORD_PARTNER"],
+        ENV["LA_VAGUE_USERNAME_ANNAMARIA"],
+        ENV["LA_VAGUE_PASSWORD_ANNAMARIA"],
         booking_date,
         booking_hour,
       )
