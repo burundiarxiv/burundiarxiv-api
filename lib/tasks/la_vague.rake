@@ -32,8 +32,16 @@ namespace :la_vague do
       ENV["BOOKING_DATE"] || calculate_booking_date.strftime("%Y-%m-%d")
     end
 
+    def headless_mode
+      ENV["HEADLESS"] == "true"
+    end
+
+    def create_browser
+      Watir::Browser.new(:chrome, headless: headless_mode)
+    end
+
     def book_for_user(username, password)
-      browser = Watir::Browser.new
+      browser = create_browser
       browser.goto "https://member.resamania.com/equalia-lavagueCPS/"
       browser.button(value: "Log in").click
       sleep 10
@@ -84,7 +92,7 @@ namespace :la_vague do
 
       puts "Booking for User 2..."
 
-      book_for_user(ENV["LA_VAGUE_USERNAME_ANNAMARIA"], ENV["LA_VAGUE_PASSWORD_ANNAMARIA"])
+      # book_for_user(ENV["LA_VAGUE_USERNAME_ANNAMARIA"], ENV["LA_VAGUE_PASSWORD_ANNAMARIA"])
       puts "Successfully booked for User 2."
 
       puts "#{course} session successfully booked for both users on #{booking_date} at #{booking_hour}."
