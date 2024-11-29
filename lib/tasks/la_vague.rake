@@ -8,10 +8,11 @@ namespace :la_vague do
     Dotenv.load
 
     current_time = Time.now
-    unless current_time.wday == 2
-      puts "The script only runs on Tuesday. Exiting."
-      exit
-    end
+
+    # unless current_time.wday == 2
+    #   puts "The script only runs on Tuesday. Exiting."
+    #   exit
+    # end
 
     # Calculate the target booking date (Tuesday of next week)
     def calculate_booking_date
@@ -50,7 +51,9 @@ namespace :la_vague do
       sleep 10
 
       grid_divs = browser.divs(class: "MuiGrid-root")
-      course = "Aquagym tonic"
+
+      # course = "Aquagym tonic"
+      course = "Aqua prénatal"
 
       aquagym_tonic_card =
         grid_divs.find do |card|
@@ -60,6 +63,7 @@ namespace :la_vague do
 
       button = aquagym_tonic_card.buttons.find { |btn| btn.text.match?(/BOOK/i) }
       button.click if button
+      sleep 10
     end
 
     # Booking for both users
@@ -75,15 +79,17 @@ namespace :la_vague do
       )
       puts "Successfully booked for User 1."
 
+      sleep 10
+
       puts "Booking for User 2..."
 
-      # book_for_user(
-      #   browser,
-      #   ENV["LA_VAGUE_USERNAME_PARTNER"],
-      #   ENV["LA_VAGUE_PASSWORD_PARTNER"],
-      #   booking_date,
-      #   booking_hour,
-      # )
+      book_for_user(
+        browser,
+        ENV["LA_VAGUE_USERNAME_PARTNER"],
+        ENV["LA_VAGUE_PASSWORD_PARTNER"],
+        booking_date,
+        booking_hour,
+      )
       puts "Successfully booked for User 2."
 
       puts "Aquagym tonic session successfully booked for both users on #{booking_date} at #{booking_hour}."
