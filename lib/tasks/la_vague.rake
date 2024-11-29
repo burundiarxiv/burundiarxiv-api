@@ -7,20 +7,20 @@ namespace :la_vague do
   task :book do
     Dotenv.load
 
-    # Helper to calculate the booking date and time
-    def calculate_booking_date_and_time
-      if ENV["BOOKING_DATE"] && ENV["BOOKING_HOUR"]
-        [ENV["BOOKING_DATE"], ENV["BOOKING_HOUR"]]
-      else
-        # Default: Book for the next week's Tuesday at 12:15
-        today = Date.today
-        next_tuesday = today + ((2 - today.wday) % 7 + 7) # Find next Tuesday
-        booking_tuesday = next_tuesday - 7 # Book the Tuesday before
-        [booking_tuesday.strftime("%Y-%m-%d"), "12:15"]
-      end
+    current_time = Time.now
+    unless current_time.wday == 2
+      puts "The script only runs on Tuesday. Exiting."
+      exit
     end
 
-    date, hour = calculate_booking_date_and_time
+    # Calculate the target booking date (Tuesday of next week)
+    def calculate_booking_date
+      today = Date.today
+      today + 7 # Always book for the next Tuesday
+    end
+
+    booking_date = ENV["BOOKING_DATE"] || calculate_booking_date.strftime("%Y-%m-%d")
+    booking_hour = ENV["BOOKING_HOUR"] || "12:15"
 
     # Helper to perform the booking for a user
     def book_for_user(browser, username, password, date, hour)
@@ -45,6 +45,7 @@ namespace :la_vague do
       browser.goto link
       sleep 10
 
+      # Maximize the window of the page
       browser.driver.manage.window.maximize
       sleep 10
 
@@ -57,7 +58,7 @@ namespace :la_vague do
       raise "No available slots found!" unless aquagym_tonic_card
 
       button = aquagym_tonic_card.buttons.find { |btn| btn.text.match?(/BOOK/i) }
-      button.click
+      button.click if button
     end
 
     # Booking for both users
@@ -68,8 +69,8 @@ namespace :la_vague do
         browser,
         ENV["LA_VAGUE_USERNAME_LIONEL"],
         ENV["LA_VAGUE_PASSWORD_LIONEL"],
-        date,
-        hour,
+        booking_date,
+        booking_hour,
       )
       puts "Successfully booked for User 1."
 
@@ -78,12 +79,12 @@ namespace :la_vague do
         browser,
         ENV["LA_VAGUE_USERNAME_PARTNER"],
         ENV["LA_VAGUE_PASSWORD_PARTNER"],
-        date,
-        hour,
+        booking_date,
+        booking_hour,
       )
       puts "Successfully booked for User 2."
 
-      puts "Aquagym tonic session successfully booked for both users on #{date} at #{hour}."
+      puts "Aquagym tonic session successfully booked for both users on #{booking_date} at #{booking_hour}."
     rescue StandardError => e
       puts "An error occurred: #{e.message}"
     ensure
