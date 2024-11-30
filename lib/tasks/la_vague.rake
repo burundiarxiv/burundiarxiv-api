@@ -9,7 +9,7 @@ namespace :la_vague do
 
     current_time = Time.now
 
-    unless current_time.wday == 6
+    unless current_time.wday == 2
       puts "The script only runs on Tuesday. Exiting."
       exit
     end
