@@ -45,23 +45,26 @@ namespace :la_vague do
       browser.goto "https://member.resamania.com/equalia-lavagueCPS/"
       browser.button(value: "Log in").click
       sleep 10
+      puts "Clicked on Log in"
 
       login_field = browser.text_field(id: "login_step_login_username")
       login_field.set username
 
       browser.button(value: "Fill in my password").click
       sleep 10
-
+      puts "Clicked on Fill in my password"
       password_field = browser.text_field(id: "_password")
       password_field.set password
 
       browser.button(value: "Log into my club").click
       sleep 10
+      puts "Clicked on Log into my club"
 
       link =
         "https://member.resamania.com/equalia-lavagueCPS/planning?club=%2Fequalia%2Fclubs%2F1238&startedAt=#{booking_date}"
       browser.goto link
       sleep 10
+      puts "Clicked on the link"
 
       # Maximize the window of the page
       browser.driver.manage.window.maximize
@@ -71,7 +74,7 @@ namespace :la_vague do
 
       aquagym_tonic_card =
         grid_divs.find do |card|
-          card.text.gsub(/\s+/, " ").match?(/#{course}.*#{booking_hour}.*BOOK/i) &&
+          card.text.gsub(/\s+/, " ").match?(/#{booking_hour}.*#{course}.*BOOK/i) &&
             card.text.size < 200
         end
       raise "No available slots found!" unless aquagym_tonic_card
@@ -90,7 +93,7 @@ namespace :la_vague do
 
       # sleep 10
 
-      puts "Booking for User 2..."
+      puts "Booking for User 2 for #{booking_date} at #{booking_hour}..."
 
       book_for_user(ENV["LA_VAGUE_USERNAME_ANNAMARIA"], ENV["LA_VAGUE_PASSWORD_ANNAMARIA"])
       puts "Successfully booked for User 2."
