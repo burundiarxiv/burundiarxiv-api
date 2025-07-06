@@ -7,12 +7,12 @@ namespace :la_vague do
   task :book do
     Dotenv.load
 
-    current_time = Time.now
+    # current_time = Time.now
 
-    unless current_time.wday == 2
-      puts "The script only runs on Tuesday. Exiting."
-      exit
-    end
+    # unless current_time.wday == 2
+    #   puts "The script only runs on Tuesday. Exiting."
+    #   exit
+    # end
 
     # Calculate the target booking date (next week)
     def calculate_booking_date
