@@ -21,7 +21,7 @@ namespace :la_vague do
     end
 
     def course
-      ENV["COURSE"] || "Aquagym tonic"
+      ENV["COURSE"] || "Aquagym tonic mardi matin"
     end
 
     def booking_hour
