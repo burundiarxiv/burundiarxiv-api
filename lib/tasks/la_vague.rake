@@ -90,12 +90,6 @@ namespace :la_vague do
 
     # Booking for both users
     begin
-      # puts "Booking for User 1..."
-      # book_for_user(ENV["LA_VAGUE_USERNAME_LIONEL"], ENV["LA_VAGUE_PASSWORD_LIONEL"])
-      # puts "Successfully booked for User 1."
-
-      # sleep 10
-
       puts "Booking for User 2 for #{booking_date} at #{booking_hour}..."
 
       book_for_user(ENV["LA_VAGUE_USERNAME_ANNAMARIA"], ENV["LA_VAGUE_PASSWORD_ANNAMARIA"])
