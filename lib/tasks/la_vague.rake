@@ -7,12 +7,12 @@ namespace :la_vague do
   task :book do
     Dotenv.load
 
-    # current_time = Time.now
+    current_time = Time.now
 
-    # unless current_time.wday == 2
-    #   puts "The script only runs on Tuesday. Exiting."
-    #   exit
-    # end
+    unless current_time.wday == 2
+      puts "The script only runs on Tuesday. Exiting."
+      exit
+    end
 
     # Calculate the target booking date (next week)
     def calculate_booking_date
@@ -22,17 +22,14 @@ namespace :la_vague do
 
     def course
       ENV["COURSE"] || "Aquagym tonic mardi matin"
-      "Aquagym Hiit mardi"
     end
 
     def booking_hour
       ENV["BOOKING_HOUR"] || "12:15"
-      "18:15"
     end
 
     def booking_date
       ENV["BOOKING_DATE"] || calculate_booking_date.strftime("%Y-%m-%d")
-      "2025-09-09"
     end
 
     def headless_mode
