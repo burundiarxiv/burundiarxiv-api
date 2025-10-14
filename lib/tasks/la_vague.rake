@@ -110,9 +110,31 @@ namespace :la_vague do
 
       course_card =
         grid_divs.find do |card|
-          card.text.gsub(/\s+/, " ").match?(/#{hour}.*#{course}.*BOOK/i) && card.text.size < 200
+          card_text = card.text.gsub(/\s+/, " ")
+
+          # Use partial matching for course name to handle truncation
+          course_words = course.split(" ")
+          first_few_words = course_words.take(3).join(".*")
+          matches = card_text.match?(/#{hour}.*#{first_few_words}.*BOOK/i) && card_text.size < 200
+
+          # Debug output
+          if card_text.include?(hour) && card_text.include?("BOOK")
+            puts "Found potential card: #{card_text}"
+            puts "Matching pattern: #{hour}.*#{first_few_words}.*BOOK"
+            puts "Match result: #{matches}"
+          end
+
+          matches
         end
-      raise "No available slots found for #{course} at #{hour}!" unless course_card
+
+      unless course_card
+        puts "Available cards with BOOK button:"
+        grid_divs.each do |card|
+          card_text = card.text.gsub(/\s+/, " ")
+          puts "  - #{card_text}" if card_text.include?("BOOK") && card_text.size < 200
+        end
+        raise "No available slots found for #{course} at #{hour}!"
+      end
 
       # Scroll to the element to ensure it's visible
       browser.execute_script(
