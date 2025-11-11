@@ -167,7 +167,15 @@ namespace :la_vague do
             book_course(browser, course, hour)
             booking_results << { course: course, hour: hour, status: :success }
           rescue StandardError => e
-            puts "Failed to book #{course} at #{hour}: #{e.message}"
+            error_msg = "#{e.message}"
+
+            # If it's an unexpected error (not our custom messages), show more details
+            unless e.message.include?("No available slots") ||
+                     e.message.include?("BOOK button not found")
+              error_msg += "\nError type: #{e.class}"
+              error_msg += "\nBacktrace:\n  #{e.backtrace.first(3).join("\n  ")}" if e.backtrace
+            end
+            puts "Failed to book #{course} at #{hour}: #{error_msg}"
             booking_results << { course: course, hour: hour, status: :failed, error: e.message }
           end
         end
@@ -182,7 +190,10 @@ namespace :la_vague do
           end
         end
       rescue StandardError => e
-        puts "Error during booking process: #{e.message}"
+        puts "\n❌ Critical error during booking process:"
+        puts "Message: #{e.message}"
+        puts "Type: #{e.class}"
+        puts "Backtrace:\n  #{e.backtrace.first(5).join("\n  ")}" if e.backtrace
         raise e
       ensure
         browser.close if browser
@@ -204,8 +215,16 @@ namespace :la_vague do
 
       book_for_user(ENV["LA_VAGUE_USERNAME_ANNAMARIA"], ENV["LA_VAGUE_PASSWORD_ANNAMARIA"])
     rescue StandardError => e
-      puts "\n❌ Fatal error: #{e.message}"
-      puts "Heroku headless browser limitation detected" if on_heroku?
+      puts "\n❌ Fatal error occurred:"
+      puts "Message: #{e.message}"
+      puts "Type: #{e.class}"
+      if e.backtrace
+        puts "Backtrace:"
+        e.backtrace.first(10).each { |line| puts "  #{line}" }
+      end
+      if on_heroku?
+        puts "\nNote: Running on Heroku - this might be due to headless browser limitations"
+      end
     end
   end
 end
