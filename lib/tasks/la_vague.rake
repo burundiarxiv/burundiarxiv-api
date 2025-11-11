@@ -66,8 +66,7 @@ namespace :la_vague do
       # Wait for login button and click
       browser.wait_until(timeout: 30) { browser.button(value: "Log in").present? }
       browser.button(value: "Log in").click
-      sleep 10
-      puts "Clicked on Log in"
+      sleep 5
 
       # Fill username
       browser.wait_until(timeout: 30) do
@@ -77,8 +76,7 @@ namespace :la_vague do
       login_field.set username
 
       browser.button(value: "Fill in my password").click
-      sleep 10
-      puts "Clicked on Fill in my password"
+      sleep 5
 
       # Fill password
       browser.wait_until(timeout: 30) { browser.text_field(id: "_password").present? }
@@ -86,8 +84,8 @@ namespace :la_vague do
       password_field.set password
 
       browser.button(value: "Log into my club").click
-      sleep 10
-      puts "Clicked on Log into my club"
+      sleep 5
+      puts "Logged in successfully"
     end
 
     def book_course(browser, course, hour)
@@ -96,12 +94,11 @@ namespace :la_vague do
       link =
         "https://member.resamania.com/equalia-lavagueCPS/planning?club=%2Fequalia%2Fclubs%2F1238&startedAt=#{booking_date}"
       browser.goto link
-      sleep 10
-      puts "Navigated to planning page"
+      sleep 5
 
       # Set window size for consistent behavior
       browser.driver.manage.window.resize_to(1920, 1080)
-      sleep 5
+      sleep 3
 
       # Wait for page to load and find elements
       browser.wait_until(timeout: 30) { browser.divs(class: "MuiGrid-root").any? }
@@ -115,33 +112,17 @@ namespace :la_vague do
           # Use partial matching for course name to handle truncation
           course_words = course.split(" ")
           first_few_words = course_words.take(3).join(".*")
-          matches = card_text.match?(/#{hour}.*#{first_few_words}.*BOOK/i) && card_text.size < 200
-
-          # Debug output
-          if card_text.include?(hour) && card_text.include?("BOOK")
-            puts "Found potential card: #{card_text}"
-            puts "Matching pattern: #{hour}.*#{first_few_words}.*BOOK"
-            puts "Match result: #{matches}"
-          end
-
-          matches
+          card_text.match?(/#{hour}.*#{first_few_words}.*BOOK/i) && card_text.size < 200
         end
 
-      unless course_card
-        puts "Available cards with BOOK button:"
-        grid_divs.each do |card|
-          card_text = card.text.gsub(/\s+/, " ")
-          puts "  - #{card_text}" if card_text.include?("BOOK") && card_text.size < 200
-        end
-        raise "No available slots found for #{course} at #{hour}!"
-      end
+      raise "No available slots found for #{course} at #{hour}!" unless course_card
 
       # Scroll to the element to ensure it's visible
       browser.execute_script(
         "arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});",
         course_card,
       )
-      sleep 2
+      sleep 1
 
       button = course_card.buttons.find { |btn| btn.text.match?(/BOOK/i) }
 
@@ -151,20 +132,19 @@ namespace :la_vague do
           "arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});",
           button,
         )
-        sleep 2
+        sleep 1
 
         # Try clicking with JavaScript if regular click fails
         begin
           button.click
         rescue => e
-          puts "Regular click failed, trying JavaScript click: #{e.message}"
           browser.execute_script("arguments[0].click();", button)
         end
-        puts "Successfully booked #{course} at #{hour}"
+        puts "✓ Successfully booked #{course} at #{hour}"
       else
         raise "BOOK button not found for #{course} at #{hour}"
       end
-      sleep 10
+      sleep 3
     end
 
     def book_for_user(username, password)
@@ -203,8 +183,6 @@ namespace :la_vague do
         end
       rescue StandardError => e
         puts "Error during booking process: #{e.message}"
-        puts "Error class: #{e.class}"
-        puts "Backtrace: #{e.backtrace.first(5).join("\n")}" if e.backtrace
         raise e
       ensure
         browser.close if browser
@@ -212,18 +190,22 @@ namespace :la_vague do
     end
 
     begin
+      puts "=" * 60
+      puts "LA VAGUE BOOKING AUTOMATION"
+      puts "=" * 60
       puts "Environment: #{on_heroku? ? "Heroku" : "Local"}"
-      puts "Headless mode: #{headless_mode}"
-      puts "Booking courses: #{courses.join(", ")} for #{booking_date} at times: #{booking_hours.join(", ")}"
+      puts "Booking date: #{booking_date}"
+      puts "Courses to book: #{courses.length}"
+      courses.each_with_index do |course, index|
+        puts "  #{index + 1}. #{course} at #{booking_hours[index]}"
+      end
+      puts "=" * 60
+      puts ""
 
       book_for_user(ENV["LA_VAGUE_USERNAME_ANNAMARIA"], ENV["LA_VAGUE_PASSWORD_ANNAMARIA"])
-
-      puts "All courses successfully booked on #{booking_date}:"
-      courses.each_with_index { |course, index| puts "  - #{course} at #{booking_hours[index]}" }
     rescue StandardError => e
-      puts "An error occurred: #{e.message}"
-      puts "Error class: #{e.class}"
-      puts "Running on Heroku - this might be due to headless browser limitations" if on_heroku?
+      puts "\n❌ Fatal error: #{e.message}"
+      puts "Heroku headless browser limitation detected" if on_heroku?
     end
   end
 end
