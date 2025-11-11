@@ -180,9 +180,26 @@ namespace :la_vague do
           raise "Number of courses (#{course_list.length}) must match number of booking hours (#{hour_list.length})"
         end
 
+        booking_results = []
         course_list.each_with_index do |course, index|
           hour = hour_list[index]
-          book_course(browser, course, hour)
+          begin
+            book_course(browser, course, hour)
+            booking_results << { course: course, hour: hour, status: :success }
+          rescue StandardError => e
+            puts "Failed to book #{course} at #{hour}: #{e.message}"
+            booking_results << { course: course, hour: hour, status: :failed, error: e.message }
+          end
+        end
+
+        # Report results
+        puts "\n--- Booking Summary ---"
+        booking_results.each do |result|
+          if result[:status] == :success
+            puts "✓ Successfully booked: #{result[:course]} at #{result[:hour]}"
+          else
+            puts "✗ Failed to book: #{result[:course]} at #{result[:hour]} - #{result[:error]}"
+          end
         end
       rescue StandardError => e
         puts "Error during booking process: #{e.message}"
