@@ -137,7 +137,7 @@ namespace :la_vague do
         # Try clicking with JavaScript if regular click fails
         begin
           button.click
-        rescue => e
+        rescue
           browser.execute_script("arguments[0].click();", button)
         end
         puts "✓ Successfully booked #{course} at #{hour}"
