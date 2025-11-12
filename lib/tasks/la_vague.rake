@@ -11,7 +11,7 @@ namespace :la_vague do
 
     unless current_time.wday == 2
       puts "The script only runs on Tuesday. Exiting."
-      exit
+      # exit
     end
 
     # Calculate the target booking date (next week)
@@ -137,7 +137,7 @@ namespace :la_vague do
         # Try clicking with JavaScript if regular click fails
         begin
           button.click
-        rescue
+        rescue StandardError
           browser.execute_script("arguments[0].click();", button)
         end
         puts "✓ Successfully booked #{course} at #{hour}"
