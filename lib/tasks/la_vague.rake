@@ -11,7 +11,7 @@ namespace :la_vague do
 
     unless current_time.wday == 2
       puts "The script only runs on Tuesday. Exiting."
-      # exit
+      exit
     end
 
     # Calculate the target booking date (next week)
