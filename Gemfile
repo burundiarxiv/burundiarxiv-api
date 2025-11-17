@@ -8,7 +8,7 @@ ruby "3.2.2"
 gem "pg", ">= 0.18", "< 2.0"
 gem "puma", "~> 7.0"
 gem "rails", "~> 7.2.2.2"
-gem "jbuilder", "~> 2.13"
+gem "jbuilder", "~> 2.14"
 
 gem "active_median"
 gem "bootsnap", ">= 1.4.2", require: false
