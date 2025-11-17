@@ -76,8 +76,8 @@ GEM
       tzinfo (~> 2.0, >= 2.0.5)
     ast (2.4.3)
     base64 (0.3.0)
-    benchmark (0.4.1)
-    bigdecimal (3.2.3)
+    benchmark (0.5.0)
+    bigdecimal (3.3.1)
     bootsnap (1.18.6)
       msgpack (~> 1.2)
     brakeman (7.1.0)
@@ -111,9 +111,9 @@ GEM
       pp (>= 0.6.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
-    jbuilder (2.13.0)
-      actionview (>= 5.0.0)
-      activesupport (>= 5.0.0)
+    jbuilder (2.14.1)
+      actionview (>= 7.0.0)
+      activesupport (>= 7.0.0)
     json (2.16.0)
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
@@ -132,7 +132,7 @@ GEM
     marcel (1.0.4)
     method_source (1.0.0)
     mini_mime (1.1.5)
-    minitest (5.25.5)
+    minitest (5.26.1)
     msgpack (1.8.0)
     net-imap (0.5.10)
       date
@@ -144,9 +144,9 @@ GEM
     net-smtp (0.5.1)
       net-protocol
     nio4r (2.7.4)
-    nokogiri (1.18.9-arm64-darwin)
+    nokogiri (1.18.10-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.18.9-x86_64-linux-gnu)
+    nokogiri (1.18.10-x86_64-linux-gnu)
       racc (~> 1.4)
     parallel (1.27.0)
     parser (3.3.10.0)
@@ -316,7 +316,7 @@ DEPENDENCIES
   dotenv
   factory_bot_rails
   faker
-  jbuilder (~> 2.13)
+  jbuilder (~> 2.14)
   listen (~> 3.9)
   pg (>= 0.18, < 2.0)
   pry-byebug
