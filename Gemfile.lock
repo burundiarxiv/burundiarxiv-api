@@ -270,7 +270,7 @@ GEM
       rubocop (~> 1.72, >= 1.72.1)
     ruby-progressbar (1.13.0)
     rubyzip (2.3.2)
-    scout_apm (5.3.8)
+    scout_apm (5.8.0)
       parser
     securerandom (0.4.1)
     selenium-webdriver (4.27.0)
