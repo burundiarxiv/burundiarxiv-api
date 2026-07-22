@@ -16,6 +16,8 @@ gem "bootsnap", ">= 1.4.2", require: false
 # Ruby 4 extracted / soon-extracted default gems
 gem "ostruct"
 gem "tsort"
+# net-imap < 0.6.4 breaks under Ruby 4 when CI eager-loads Action Mailer
+gem "net-imap", ">= 0.6.4"
 gem "rack-cors", require: "rack/cors"
 gem "yt"
 gem "dotenv"
