@@ -28,7 +28,8 @@ group :development, :test do
   gem "brakeman", ">=5.2.1", require: false
   gem "faker"
   gem "pry-byebug"
-  gem "readline-ext"
+  # Pure-Ruby Readline (Reline) for Ruby 4; avoid readline-ext (needs libreadline on CI)
+  gem "readline"
   gem "factory_bot_rails"
   gem "rspec-rails"
   gem "rubocop", require: false
