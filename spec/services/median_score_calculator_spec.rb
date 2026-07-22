@@ -15,14 +15,14 @@ RSpec.describe MedianScoreCalculator do
       create(:game, score: 20, country: "Burundi", solution: "other")
 
       expect(described_class.call(games: games_won_with_solution, country: "Burundi")).to eq (
-           { international_score: "14", national_score: "17" }
-         )
+        { international_score: "14", national_score: "17" }
+      )
     end
 
     it "returns a dash when there is no game" do
       expect(described_class.call(games: games_won_with_solution, country: "Burundi")).to eq (
-           { international_score: "-", national_score: "-" }
-         )
+        { international_score: "-", national_score: "-" }
+      )
     end
 
     context "median_international_score" do
