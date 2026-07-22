@@ -9,7 +9,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.2.2
+          ruby-version: .ruby-version
           bundler-cache: true
           rubygems: latest
       - run: bundle exec rubocop
@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v1
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.2.2
+          ruby-version: .ruby-version
           bundler-cache: true
           rubygems: latest
       - name: Brakeman
@@ -54,7 +54,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.2.2
+          ruby-version: .ruby-version
       - name: Install PostgreSQL
         run: sudo apt-get -yqq install libpq-dev
       - name: Run bundle install

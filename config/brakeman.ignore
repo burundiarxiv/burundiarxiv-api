@@ -1,0 +1,9 @@
+{
+  "ignored_warnings": [
+    {
+      "fingerprint": "98b26f60d776fd41ee6f088c833725145be9aac2d7c5b33780241c273622db42",
+      "note": "Rails 7.2 EOL is tracked separately; Ruby 4 upgrade is intentionally scoped without a Rails bump."
+    }
+  ],
+  "brakeman_version": "8.0.5"
+}
