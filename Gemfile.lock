@@ -132,7 +132,10 @@ GEM
     marcel (1.0.4)
     method_source (1.0.0)
     mini_mime (1.1.5)
-    minitest (5.25.5)
+    mini_portile2 (2.8.9)
+    minitest (6.0.6)
+      drb (~> 2.0)
+      prism (~> 1.5)
     msgpack (1.8.0)
     net-imap (0.5.10)
       date
@@ -144,16 +147,15 @@ GEM
     net-smtp (0.5.1)
       net-protocol
     nio4r (2.7.4)
-    nokogiri (1.18.9-arm64-darwin)
+    nokogiri (1.18.9)
+      mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    nokogiri (1.18.9-x86_64-linux-gnu)
-      racc (~> 1.4)
+    ostruct (0.6.3)
     parallel (1.27.0)
     parser (3.3.10.0)
       ast (~> 2.4.1)
       racc
-    pg (1.6.2-arm64-darwin)
-    pg (1.6.2-x86_64-linux)
+    pg (1.6.2)
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
@@ -218,6 +220,7 @@ GEM
     rdoc (6.14.2)
       erb
       psych (>= 4.0.0)
+    readline-ext (0.2.0)
     regexp_parser (2.11.3)
     reline (0.6.2)
       io-console (~> 0.5)
@@ -288,11 +291,12 @@ GEM
     stringio (3.1.7)
     thor (1.4.0)
     timeout (0.4.3)
+    tsort (0.2.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (3.2.0)
       unicode-emoji (~> 4.1)
-    unicode-emoji (4.1.0)
+    unicode-emoji (4.2.0)
     useragent (0.16.11)
     watir (7.3.0)
       regexp_parser (>= 1.2, < 3)
@@ -308,6 +312,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-22
+  arm64-darwin-25
   x86_64-linux
 
 DEPENDENCIES
@@ -319,11 +324,13 @@ DEPENDENCIES
   faker
   jbuilder (~> 2.13)
   listen (~> 3.9)
+  ostruct
   pg (>= 0.18, < 2.0)
   pry-byebug
   puma (~> 7.0)
   rack-cors
   rails (~> 7.2.2.2)
+  readline-ext
   rollbar
   rspec-rails
   rubocop
@@ -335,12 +342,13 @@ DEPENDENCIES
   shoulda-matchers
   spring
   spring-watcher-listen (~> 2.1.0)
+  tsort
   tzinfo-data
   watir
   yt
 
 RUBY VERSION
-   ruby 3.2.2p53
+   ruby 4.0.6p0
 
 BUNDLED WITH
    2.5.23
